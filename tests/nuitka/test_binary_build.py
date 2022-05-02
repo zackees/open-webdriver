@@ -58,5 +58,7 @@ assert os.path.exists(APP_EXE_OUT)
 
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
 
-print(f"Now testing running of binary")
+print(f"Now testing running of binary {APP_EXE_OUT}")
 assert 0 == os.system(f"{APP_EXE_OUT}")
+
+print(f"Output of running binary {APP_EXE_OUT} was successful")
