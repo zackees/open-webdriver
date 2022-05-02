@@ -34,10 +34,11 @@ CMD = [
     "pip install .",
     "&&",
     "python -m nuitka",
+    "--assume-yes-for-downloads",
     "--follow-imports",
     "--standalone",
     "--python-flag=-OO",  # Optimize for speed and remove comments.
-    "--include-package-data=selenium,rss2gab",
+    "--include-package-data=selenium",
     f"--output-dir={APP_BUILD_DIR}",
     APP_SRC,
     "--onefile",
@@ -58,5 +59,8 @@ os.chdir(APP_BUILD_DIR)
 # make a zip file of the APP_NAME at the current directory
 with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
     zipf.write(APP_NAME)
+    
+expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
+assert os.path.exists(expected_zip_file)
 
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
