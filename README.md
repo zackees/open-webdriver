@@ -38,5 +38,5 @@ with open_webdriver() as driver:
 Just simply run `tox` at the command line and everything should be tested. You may need to install `tox` with `python -m pip tox`.
 
 # Changes
-  * 1.0.2: Now uses pinned 
-  * 1.0.0: Initial code submit
+  * 1.0.3: Now pins dependencies.
+  * 1.0.0: Initial code submit.
