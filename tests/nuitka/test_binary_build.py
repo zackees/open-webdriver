@@ -1,5 +1,5 @@
 """
-    Builds the bigleague site.
+    Demo app build in nuitka.
 """
 
 # pylint: disable=R1716
