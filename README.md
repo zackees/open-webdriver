@@ -46,6 +46,14 @@ with open_webdriver() as driver:
 
 Just simply run `tox` at the command line and everything should be tested. You may need to install `tox` with `python -m pip tox`.
 
+# Nuitka
+
+This package supports the Nuitka cross compiler to binary app. However to make this work YOU MUST include the package data for selenium or you will get errors about missing javascript files when the program loads. To get around this you'll need to add package data:
+
+`python -m nuitka --include-package-data=selenium ...`
+
+In your build command.
+
 # Changes
   * 1.1.0: Platform binary builds using nuitka are now tested.
   * 1.0.4: Now pins dependencies.
