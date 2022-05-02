@@ -21,7 +21,7 @@ if sys.platform == "win32":
 
 APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}",
 CMD = [
-    "pip install nuitka zstandard",
+    "pip install -r requirements.nuitka.txt",
     "&&",
     "pip install -e .",
     "&&",
@@ -29,7 +29,7 @@ CMD = [
     "--assume-yes-for-downloads",
     "--follow-imports",
     "--standalone",
-    "--python-flag=-OO",  # Optimize for speed and remove comments.
+    "--python-flag=-OO",  # Strips comments
     "--include-package-data=selenium",
     f"--output-dir={APP_BUILD_DIR}",
     APP_SRC,
