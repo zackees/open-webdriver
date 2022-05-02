@@ -26,6 +26,7 @@ Benefits:
   * Intelligently forces headless in a linux environment without a display card (prevents crash).
   * Platform tests to ensure a stable cross platform experience.
   * Pins to a specific version of selenium driver stack to ensure reproducable behavior.
+  * Nuitka Binary Builds for all platforms are tested.
 
 # Install
 
