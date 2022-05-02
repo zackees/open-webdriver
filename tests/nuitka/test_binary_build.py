@@ -19,7 +19,7 @@ APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
 
-
+APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}",
 CMD = [
     "pip install nuitka zstandard",
     "&&",
@@ -35,7 +35,7 @@ CMD = [
     APP_SRC,
     "--onefile",
     "-o",
-    f"{APP_BUILD_DIR}/{APP_NAME}",
+    APP_EXE_OUT,
 ]
 CMD_STR = " ".join(CMD)
 
@@ -54,5 +54,9 @@ with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
     
 expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
 assert os.path.exists(expected_zip_file)
+assert os.path.exists(APP_EXE_OUT)
 
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
+
+print(f"Now testing running of binary")
+assert 0 == os.system(f"{APP_EXE_OUT}")
