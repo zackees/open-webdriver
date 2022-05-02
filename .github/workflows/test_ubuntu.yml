@@ -24,7 +24,7 @@ jobs:
           ${{ runner.os }}-pip-
     - name: Install dependencies
       run: |
-        pip install -e '.[test]'
+        pip install -e . && pip install -r requirements.testing.txt
     - name: Run tests
       run: |
         pytest --ignore-glob=**/archive/**
