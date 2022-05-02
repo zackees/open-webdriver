@@ -15,8 +15,9 @@ Benefits:
   * ssl certs are turned off to reduce errors for many websites.
   * Downloading the proper binary for your platform and stashing it next to the app.
   * Headless by default.
-  * Intelligently forces headless in a linux environment without a display card (prevents crash)
+  * Intelligently forces headless in a linux environment without a display card (prevents crash).
   * Platform tests to ensure a stable cross platform experience.
+  * Pins to a specific version of selenium driver stack to ensure reproducable behavior.
 
 # Install
 
@@ -37,4 +38,5 @@ with open_webdriver() as driver:
 Just simply run `tox` at the command line and everything should be tested. You may need to install `tox` with `python -m pip tox`.
 
 # Changes
+  * 1.0.2: Now uses pinned 
   * 1.0.0: Initial code submit
