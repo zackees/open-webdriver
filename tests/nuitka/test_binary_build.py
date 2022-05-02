@@ -19,7 +19,7 @@ APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
 
-APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}",
+APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}"
 CMD = [
     "pip install -r requirements.nuitka.txt",
     "&&",
