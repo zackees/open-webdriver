@@ -22,9 +22,6 @@ jobs:
         key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
         restore-keys: |
           ${{ runner.os }}-pip-
-    - name: Install dependencies
+    - name: Run Binary Build
       run: |
         python tests/nuitka/test_binary_build.py
-    - name: Run tests
-      run: |
-        pytest --ignore-glob=**/archive/**
