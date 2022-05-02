@@ -13,7 +13,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(HERE))
 
 os.chdir(PROJECT_ROOT)
 
-APP_SRC = os.path.join(PROJECT_ROOT, "tests", "nuitka", "test_data", "demo_app.py")
+APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
 APP_BUILD_DIR = os.path.join(PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app")
 APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
