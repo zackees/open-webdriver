@@ -19,19 +19,11 @@ APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
 
-if not os.path.exists("activate.sh"):
-    rtn = os.system("./install_dev.sh")
-    if rtn != 0:
-        print("Failed to install")
-        sys.exit(rtn)
-
 
 CMD = [
-    ". activate.sh",
-    "&&",
     "pip install nuitka zstandard",
     "&&",
-    "pip install .",
+    "pip install -e .",
     "&&",
     "python -m nuitka",
     "--assume-yes-for-downloads",
