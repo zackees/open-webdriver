@@ -1,4 +1,4 @@
-name: Win_Tests
+name: Win_Nuitka
 
 on: [push]
 
