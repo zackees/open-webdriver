@@ -3,7 +3,6 @@
 """
 
 import os
-import ssl
 import sys
 from typing import Any
 
@@ -12,11 +11,7 @@ from selenium.webdriver import FirefoxOptions
 from webdriver_setup import get_webdriver_for  # type: ignore
 from webdriver_setup.driver import DriverBase as Driver  # type: ignore
 
-# Is this still necessary?
-ssl._create_default_https_context = (  # pylint: disable=protected-access
-    ssl._create_unverified_context  # pylint: disable=protected-access
-)
-
+# Turn off SSL verification to allow visiting websites with self-signed certs.
 os.environ["WDM_SSL_VERIFY"] = "0"
 os.environ["WDM_LOCAL"] = "1"
 
