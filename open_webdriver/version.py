@@ -1,2 +1,2 @@
 """Simply contains the version of the app."""
-VERSION = "1.1.0"
+VERSION = "1.1.1"
