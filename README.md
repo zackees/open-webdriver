@@ -1,5 +1,7 @@
 # open-webdriver
 
+## The simplest and easiest way to get a selenium webdriver
+
 ## Platform Unit Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
@@ -12,10 +14,11 @@
 
 # About
 
-The simplest and most production-ready selenium webdriver wrapper API in python.
+Yet another selenium webdriver wrapper API in python.
 
-All the other api-wrappers are under tested and break as soon as they are thrown into a headless
-production server. This project aims to make something that's easy to develop and safe.
+This api is tested with github actions and the pain points have been found and smoothed out. For example the webdriver is downloaded and installed on first use. Addiotionally this library has been built to support
+the nuitka binary compilation of python. This allows you to make a bot and then distribute just a binary
+version to a client.
 
 Benefits:
 
@@ -56,6 +59,7 @@ For example see the example build file:
 [https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py)
 
 # Changes
+  * 1.1.1: Update readme.
   * 1.1.0: Platform binary builds using nuitka are now tested.
   * 1.0.4: Now pins dependencies.
   * 1.0.0: Initial code submit.
