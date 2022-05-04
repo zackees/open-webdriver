@@ -1,3 +1,7 @@
+"""
+Demo app to open up a webdriver to a website then close.
+"""
+
 from open_webdriver import open_webdriver
 
 

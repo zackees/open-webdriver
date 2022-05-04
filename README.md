@@ -59,6 +59,7 @@ For example see the example build file:
 [https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py)
 
 # Changes
+  * 1.1.2: Suppress certificate warnings.
   * 1.1.1: Update readme.
   * 1.1.0: Platform binary builds using nuitka are now tested.
   * 1.0.4: Now pins dependencies.
