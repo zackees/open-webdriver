@@ -12,7 +12,7 @@ from setuptools import Command, find_packages, setup
 HERE = os.path.dirname(__file__)
 
 NAME = "open_webdriver"
-DESCRIPTION = "Easiestm zero-config selenium webdriver for Python"
+DESCRIPTION = "Easiest zero-config selenium webdriver for Python"
 URL = "https://github.com/zackees/open-webdriver"
 EMAIL = "dont@email.me"
 AUTHOR = "Zach Vorhies"
@@ -26,9 +26,7 @@ with open(os.path.join(HERE, "README.md"), encoding="utf-8", mode="rt") as fd:
 with open(os.path.join(HERE, "requirements.txt"), encoding="utf-8", mode="rt") as fd:
     REQUIREMENTS = [line.strip() for line in fd.readlines() if line.strip()]
 
-with open(
-    os.path.join(HERE, NAME, "version.py"), encoding="utf-8", mode="rt"
-) as fd:
+with open(os.path.join(HERE, NAME, "version.py"), encoding="utf-8", mode="rt") as fd:
     for line in fd.readlines():
         if line.startswith("VERSION"):
             VERSION = line.split("=")[1].strip().strip('"')
