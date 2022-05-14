@@ -16,7 +16,7 @@ else:
 
 def do_test(driver_name: str, headless: bool) -> bool:
     """Runs the tests for a given driver."""
-    with open_webdriver(driver_name=driver_name, headless=headless) as driver:
+    with open_webdriver(driver_name=driver_name, headless=headless, verbose=True) as driver:
         driver.get("https://www.google.com")
         return driver.title == "Google"
 
