@@ -12,7 +12,7 @@ from setuptools import Command, find_packages, setup
 HERE = os.path.dirname(__file__)
 
 NAME = "open_webdriver"
-DESCRIPTION = "Selenium driver that posts to gab."
+DESCRIPTION = "Easiestm zero-config selenium webdriver for Python"
 URL = "https://github.com/zackees/open-webdriver"
 EMAIL = "dont@email.me"
 AUTHOR = "Zach Vorhies"
