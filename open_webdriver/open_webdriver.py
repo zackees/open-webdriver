@@ -50,7 +50,6 @@ def open_webdriver(
         if headless:
             opts.add_argument("--headless")
             opts.add_argument("--disable-gpu")
-            opts.add_argument("--no-sandbox")
     elif driver_name == "firefox":
         print(f"{__file__}: Warning: firefox browser has known issues.")
         opts = FirefoxOptions()
