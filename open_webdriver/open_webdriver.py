@@ -44,7 +44,7 @@ def open_webdriver(driver_name: str = DEFAULT_DRIVER, headless: bool = True) -> 
         elif driver_name == "firefox":
             opts = FirefoxOptions()
             opts.headless = True
-            opts.accept_insecure_certs(True)
+            opts.accept_insecure_certs = True
         else:
             raise NotImplementedError(
                 f"{__file__}: headless mode for {driver_name} is not supported."
