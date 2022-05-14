@@ -13,8 +13,6 @@ from typing import Any
 import urllib3  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver import FirefoxOptions
-
-# from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_setup import get_webdriver_for  # type: ignore
 from webdriver_setup.driver import DriverBase as Driver  # type: ignore
 
@@ -24,7 +22,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Turn off SSL verification to allow visiting websites with self-signed certs.
 os.environ["WDM_SSL_VERIFY"] = "0"
-os.environ["WDM_LOCAL"] = "1"
+if "WDM_LOCAL" not in os.environ:
+    os.environ["WDM_LOCAL"] = "1"
 
 FORCE_HEADLESS = sys.platform == "linux" and "DISPLAY" not in os.environ
 DEFAULT_DRIVER = "chrome"
@@ -44,10 +43,10 @@ def open_webdriver(
 
     if driver_name in ["chrome", "brave"]:
         # For Chrome/Brave just install the driver immediately.
-        # driver_path = ChromeDriverManager(cache_valid_range=7).install()
         opts = ChromeOptions()
-        # opts.binary_location = driver_path
-        opts.add_argument('--ignore-certificate-errors')
+        opts.add_argument("--ignore-certificate-errors")
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
         if headless:
             opts.add_argument("--headless")
             opts.add_argument("--disable-gpu")
