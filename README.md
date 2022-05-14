@@ -59,6 +59,7 @@ For example see the example build file:
 [https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py)
 
 # Changes
+  * 1.1.6: Fixes failing win-tox tests due to missing "PROGRAMW6432" value in os.environ (?!). Brave browser removed as it actually didn't work.
   * 1.1.5: Cert warnings now suppressable with non headless sessions.
   * 1.1.3: Suppress more cert warnings.
   * 1.1.2: Suppress certificate warnings.

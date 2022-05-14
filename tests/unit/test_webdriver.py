@@ -3,6 +3,7 @@
 """
 
 import os
+import sys
 import unittest
 
 from open_webdriver import open_webdriver
@@ -10,7 +11,7 @@ from open_webdriver import open_webdriver
 FULL_TESTS = os.environ.get("FULL_TESTS", "0") == "0"
 
 if FULL_TESTS:
-    all_drivers = ["chrome", "firefox", "brave"]
+    all_drivers = ["chrome", "firefox"]
 else:
     all_drivers = ["chrome"]
 
@@ -24,6 +25,11 @@ def do_google_test(driver_name: str, headless: bool) -> bool:
 
 class OpenWebDriverTests(unittest.TestCase):
     """Tester for open_webdriver.py"""
+
+    @unittest.skipIf(sys.platform != "win32", "Windows only tests")
+    def test_win32_bug(self) -> None:
+        """Asserts that the win32 bug is fixed."""
+        self.assertIn("PROGRAMW6432", os.environ)
 
     def test_google(self) -> None:
         """Tests that google test works."""

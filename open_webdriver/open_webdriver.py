@@ -34,6 +34,12 @@ def open_webdriver(
 ) -> Driver:
     """Opens the web driver."""
 
+    # Hack for windows. This is needed or else web-driver will fail to start
+    # and report a very strange error that it can't find the binary. This
+    # seems to happen ONLY in tox spawned tests.
+    if sys.platform == "win32":
+        os.environ.setdefault("PROGRAMW6432", "C:\\Program Files")
+
     opts: Any = None
 
     if headless or FORCE_HEADLESS:
@@ -41,7 +47,7 @@ def open_webdriver(
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
         headless = True
 
-    if driver_name in ["chrome", "brave"]:
+    if driver_name in ["chrome"]:
         # For Chrome/Brave just install the driver immediately.
         opts = ChromeOptions()
         opts.add_argument("--ignore-certificate-errors")
@@ -58,7 +64,7 @@ def open_webdriver(
             opts.headless = True
     else:
         raise NotImplementedError(
-            f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox, brave."
+            f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox."
         )
     # Don't spam the console with warnings.
     try:
