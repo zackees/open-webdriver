@@ -13,6 +13,8 @@ from typing import Any
 import urllib3  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver import FirefoxOptions
+
+# from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_setup import get_webdriver_for  # type: ignore
 from webdriver_setup.driver import DriverBase as Driver  # type: ignore
 
@@ -28,33 +30,44 @@ FORCE_HEADLESS = sys.platform == "linux" and "DISPLAY" not in os.environ
 DEFAULT_DRIVER = "chrome"
 
 
-def open_webdriver(driver_name: str = DEFAULT_DRIVER, headless: bool = True) -> Driver:
+def open_webdriver(
+    driver_name: str = DEFAULT_DRIVER, headless: bool = True, verbose: bool = False
+) -> Driver:
     """Opens the web driver."""
 
     opts: Any = None
+
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
-        if driver_name in ["chrome", "brave"]:
-            opts = ChromeOptions()
+        headless = True
+
+    if driver_name in ["chrome", "brave"]:
+        # For Chrome/Brave just install the driver immediately.
+        # driver_path = ChromeDriverManager(cache_valid_range=7).install()
+        opts = ChromeOptions()
+        # opts.binary_location = driver_path
+        opts.add_argument('--ignore-certificate-errors')
+        if headless:
             opts.add_argument("--headless")
             opts.add_argument("--disable-gpu")
-            opts.add_argument("--disable-dev-shm-usage")
-            opts.add_argument('--ignore-certificate-errors')
-        elif driver_name == "firefox":
-            opts = FirefoxOptions()
-            opts.headless = True
-            opts.accept_insecure_certs = True
-        else:
-            raise NotImplementedError(
-                f"{__file__}: headless mode for {driver_name} is not supported."
-            )
-    if driver_name == "firefox":
+            opts.add_argument("--no-sandbox")
+    elif driver_name == "firefox":
         print(f"{__file__}: Warning: firefox browser has known issues.")
+        opts = FirefoxOptions()
+        opts.accept_insecure_certs = True
+        if headless:
+            opts.headless = True
+    else:
+        raise NotImplementedError(
+            f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox, brave."
+        )
     # Don't spam the console with warnings.
     try:
-        logging.captureWarnings(True)
+        if not verbose:
+            logging.captureWarnings(True)
         driver = get_webdriver_for(browser=driver_name, options=opts)
     finally:
-        logging.captureWarnings(False)
+        if not verbose:
+            logging.captureWarnings(False)
     return driver
