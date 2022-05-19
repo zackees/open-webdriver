@@ -29,6 +29,9 @@ class OpenWebDriverTests(unittest.TestCase):
     @unittest.skipIf(sys.platform != "win32", "Windows only tests")
     def test_win32_bug(self) -> None:
         """Asserts that the win32 bug is fixed."""
+        with open_webdriver():
+            pass
+        # This environmental variable should be available now.
         self.assertIn("PROGRAMW6432", os.environ)
 
     def test_google(self) -> None:

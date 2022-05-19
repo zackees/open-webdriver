@@ -16,12 +16,22 @@
 
 Yet another selenium webdriver wrapper API in python, with the aims of being the easist to use with only two lines of code to get running.
 
-One function is provide, `open_webdriver(...)` which takes care of downloading, installing and then running selenium.
+Unlike other selenium web driver wrappers, this one **is well tested on Windows10/MacOS/Ubuntu platforms**.
 
-Additionally, sane defaults are set, such as headless by default and ssl certs turned off. This code is also tested for use with
-the nuitka build, which allows you to create an binary executable with selenium. This is great for distributing a compiled binary
-for Windows/MacOS/Ubuntu of your selenium bot with all original source code removed. This makes it functionally impossible for your client to reverse
-engineer the product.
+One function is provided, `open_webdriver(...)` which takes care of downloading, installing and then running selenium.
+
+Additionally, sane defaults are set, such as headless by default and ssl certs turned off. This code is also tested and examples are provided for use with the nuitka cross compiler, which allows you to create an binary executable. This is great for distributing a compiled binary
+for Windows/MacOS/Ubuntu of your selenium bot with all original source code removed, making it impossible to reverse engineer.
+
+
+`open-webdriver` is essentially a wrapper around the very excellent https://pypi.org/project/webdriver-manager/ library, but with the following changes/fixes:
+```
+os.environ['WDM_LOCAL'] = '1'
+os.environ['WDM_SSL_VERIFY'] = '0'
+```
+And other sensible platform specific fixes are applied in order for the selenium driver stack to pass the test suite.
+
+When your app is launched, there will be a side folder name `.wdm` which contain the download of the webdriver used. The disk cache for the driver is set for 1 day, after which it will be checked for a new version.
 
 Benefits:
 
@@ -33,6 +43,12 @@ Benefits:
   * Platform tests to ensure a stable cross platform experience.
   * Pins to a specific version of selenium driver stack to ensure reproducable behavior.
   * Nuitka Binary Builds for all platforms are tested.
+
+Downsides:
+
+  * Only chrome is supported right now. Firefox is experimental and is flaky on some tests/platforms. Open to pull requests if you fix this.
+
+
 
 # Install
 
@@ -60,6 +76,12 @@ This package supports the Nuitka cross compiler to binary app. However to make t
 
 For example see the example build file:
 [https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py)
+
+# Pull Requests
+
+Pull requests are welcome for this code base. When you submit your pull request you will need to have the following:
+  * New code must have a unit/test.
+  * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
   * 1.1.7: Nit readme.

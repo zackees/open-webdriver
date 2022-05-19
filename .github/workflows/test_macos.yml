@@ -1,6 +1,6 @@
 name: MacOS_Tests
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   test:
@@ -27,4 +27,4 @@ jobs:
         pip install -e . && pip install -r requirements.testing.txt
     - name: Run tests
       run: |
-        pytest tests/unit
+        tox
