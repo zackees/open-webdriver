@@ -14,11 +14,14 @@
 
 # About
 
-Yet another selenium webdriver wrapper API in python.
+Yet another selenium webdriver wrapper API in python, with the aims of being the easist to use with only two lines of code to get running.
 
-This api is tested with github actions and the pain points have been found and smoothed out. For example the webdriver is downloaded and installed on first use. Addiotionally this library has been built to support
-the nuitka binary compilation of python. This allows you to make a bot and then distribute just a binary
-version to a client.
+One function is provide, `open_webdriver(...)` which takes care of downloading, installing and then running selenium.
+
+Additionally, sane defaults are set, such as headless by default and ssl certs turned off. This code is also tested for use with
+the nuitka build, which allows you to create an binary executable with selenium. This is great for distributing a compiled binary
+for Windows/MacOS/Ubuntu of your selenium bot with all original source code removed. This makes it functionally impossible for your client to reverse
+engineer the product.
 
 Benefits:
 
