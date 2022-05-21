@@ -87,6 +87,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.1.10: Nit improvements.
   * 1.1.9: Moves tests into package to allow running tests from package.
   * 1.1.8: Minor fixes
   * 1.1.7: Nit readme.

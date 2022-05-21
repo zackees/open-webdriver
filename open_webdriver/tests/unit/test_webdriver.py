@@ -18,9 +18,7 @@ else:
 
 def do_google_test(driver_name: str, headless: bool) -> bool:
     """Runs the tests for a given driver."""
-    with open_webdriver(
-        driver_name=driver_name, headless=headless, verbose=True
-    ) as driver:
+    with open_webdriver(driver_name=driver_name, headless=headless, verbose=True) as driver:
         driver.get("https://www.google.com")
         return driver.title == "Google"
 
@@ -49,5 +47,10 @@ class OpenWebDriverTests(unittest.TestCase):
             self.assertTrue(ok)
 
 
-if __name__ == "__main__":
+def main():
+    """Runs the tests."""
     unittest.main()
+
+
+if __name__ == "__main__":
+    main()
