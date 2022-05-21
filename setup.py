@@ -97,7 +97,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "open_webdriver_tests = open_webdriver:test",
+            "open_webdriver_test = open_webdriver:test",
         ],
     },
     extras_require={

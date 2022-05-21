@@ -91,7 +91,9 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
-  * 1.1.10: Adds package test `open_webdriver_tests` cmd
+
+  * 1.1.11: Misc fix.
+  * 1.1.10: Adds package test `open_webdriver_test` cmd
   * 1.1.9: Moves tests into package to allow running tests from package.
   * 1.1.8: Minor fixes
   * 1.1.7: Nit readme.

@@ -6,7 +6,7 @@ import os
 import sys
 import unittest
 
-from open_webdriver import open_webdriver
+from open_webdriver.open_webdriver import open_webdriver
 
 FULL_TESTS = os.environ.get("FULL_TESTS", "0") == "0"
 
