@@ -5,6 +5,7 @@
 import os
 import sys
 import unittest
+from lib2to3.pytree import Base
 
 from open_webdriver.open_webdriver import open_webdriver
 
@@ -49,8 +50,14 @@ class OpenWebDriverTests(unittest.TestCase):
 
 def package_tests() -> None:
     """Package tests to be run on the command line to ensure open_webdriver works on the system."""
-    assert do_google_test("chrome", headless=True), "\nweb driver test failed."
-    print("\nTest completed successfully.")
+    try:
+        _ = do_google_test("chrome", headless=True)
+        print("\open_webdriver_test completed successfully.\n")
+        return
+    except Exception as err:
+        print(f"{__file__}: Error: {err}")
+        print("\n  FAILED: open_webdriver_test")
+        return
 
 
 def main():
