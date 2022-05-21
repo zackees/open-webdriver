@@ -27,4 +27,4 @@ jobs:
         pip install -e . && pip install -r requirements.nuitka.txt
     - name: Run Binary Build
       run: |
-        python tests/nuitka/test_binary_build.py
+        python open_webdriver/tests/nuitka/test_binary_build.py

@@ -68,6 +68,9 @@ with open_webdriver() as driver:
 
 Just simply run `tox` at the command line and everything should be tested. You may need to install `tox` with `python -m pip tox`.
 
+If you are installing from the pypi package then use the built in test:
+`python -m open_webdriver.tests.unit.test_webdriver.py`
+
 # Nuitka
 
 This package supports the Nuitka cross compiler to binary app. However to make this work YOU MUST include the package data for selenium or you will get errors about missing javascript files when the program loads. To get around this you'll need to add package data:
@@ -84,6 +87,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.1.9: 
   * 1.1.8: Minor fixes
   * 1.1.7: Nit readme.
   * 1.1.6: Fixes failing win-tox tests due to missing "PROGRAMW6432" value in os.environ (?!). Brave browser removed as it actually didn't work.

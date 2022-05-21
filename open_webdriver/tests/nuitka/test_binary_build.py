@@ -9,7 +9,7 @@ import sys
 import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(os.path.dirname(HERE))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 
 os.chdir(PROJECT_ROOT)
 
@@ -51,7 +51,7 @@ os.chdir(APP_BUILD_DIR)
 # make a zip file of the APP_NAME at the current directory
 with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
     zipf.write(APP_NAME)
-    
+
 expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
 assert os.path.exists(expected_zip_file)
 assert os.path.exists(APP_EXE_OUT)
