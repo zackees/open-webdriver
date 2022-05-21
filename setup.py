@@ -95,6 +95,11 @@ setup(
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     package_data={},
     include_package_data=True,
+    entry_points={
+        "console_scripts": [
+            "open_webdriver_tests = open_webdriver:test",
+        ],
+    },
     extras_require={
         "test": ["pytest"],
     },

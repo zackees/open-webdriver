@@ -47,6 +47,12 @@ class OpenWebDriverTests(unittest.TestCase):
             self.assertTrue(ok)
 
 
+def package_tests() -> None:
+    """Package tests to be run on the command line to ensure open_webdriver works on the system."""
+    assert do_google_test("chrome", headless=True), "\nweb driver test failed."
+    print("\nTest completed successfully.")
+
+
 def main():
     """Runs the tests."""
     unittest.main()
