@@ -69,7 +69,7 @@ with open_webdriver() as driver:
 Just simply run `tox` at the command line and everything should be tested. You may need to install `tox` with `python -m pip tox`.
 
 If you are installing from the pypi package then use the built in test:
-`python -m open_webdriver.tests.unit.test_webdriver.py`
+`python -m open_webdriver.tests.unit.test_webdriver`
 
 # Nuitka
 
