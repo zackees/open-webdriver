@@ -87,7 +87,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
-  * 1.1.9: 
+  * 1.1.9: Moves tests into package to allow running tests from package.
   * 1.1.8: Minor fixes
   * 1.1.7: Nit readme.
   * 1.1.6: Fixes failing win-tox tests due to missing "PROGRAMW6432" value in os.environ (?!). Brave browser removed as it actually didn't work.
