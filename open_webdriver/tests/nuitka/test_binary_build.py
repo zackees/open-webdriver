@@ -14,7 +14,9 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 os.chdir(PROJECT_ROOT)
 
 APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
-APP_BUILD_DIR = os.path.join(PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app")
+APP_BUILD_DIR = os.path.join(
+    PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
+)
 APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
@@ -56,7 +58,9 @@ expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
 assert os.path.exists(expected_zip_file)
 assert os.path.exists(APP_EXE_OUT)
 
-print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
+print(
+    f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n'
+)
 
 print(f"Now testing running of binary {APP_EXE_OUT}")
 assert 0 == os.system(f"{APP_EXE_OUT}")
