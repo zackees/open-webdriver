@@ -53,7 +53,7 @@ def package_tests() -> None:
         _ = do_google_test("chrome", headless=True)
         print("\nopen_webdriver_test completed successfully.\n")
         return
-    except Exception as err:  # pytype: disable=broad-except
+    except Exception as err:  # pylint: disable=broad-except
         print(f"{__file__}: Error: {err}")
         print("\n  FAILED: open_webdriver_test")
         return
