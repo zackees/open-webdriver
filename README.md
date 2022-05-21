@@ -16,7 +16,7 @@
 
 Yet another selenium webdriver wrapper API in python, with the aims of being the easist to use with only two lines of code to get running.
 
-Unlike other selenium web driver wrappers, this one **is well tested on Windows10/MacOS/Ubuntu platforms**.
+Unlike other selenium web driver wrappers, this one **has tests for Windows10/MacOS/Ubuntu platforms**.
 
 One function is provided, `open_webdriver(...)` which takes care of downloading, installing and then running selenium.
 
