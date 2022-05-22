@@ -12,7 +12,7 @@ class OpenWebDriverTests(unittest.TestCase):
     """Tester for open_webdriver.py"""
 
     @unittest.skipIf(sys.platform != "win32", "Windows only tests")
-    def test_osenv(self) -> None:
+    def test_osenv(self) -> None:  # pylint: disable=no-self-use
         """Asserts that the win32 bug is fixed."""
         pprint(dict(os.environ))
 
