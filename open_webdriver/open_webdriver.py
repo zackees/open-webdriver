@@ -15,6 +15,8 @@ from selenium.webdriver import ChromeOptions  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.driver import Driver  # type: ignore
 
+from .download_chromium import get_chromium_exe
+
 urllib3.disable_warnings()
 
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -31,13 +33,6 @@ CACHE_TIMEOUT = 7
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 LOG_FILE = os.path.join(ROOT, "open_webdriver.log")
-
-
-def get_chromium_exe() -> str:
-    """Get the path to the Chrome executable."""
-    if sys.platform == "win32":
-        return os.path.join(ROOT, "chromium", "win32", "chrome.exe")
-    raise NotImplementedError(f"Unsupported platform: {sys.platform}")
 
 
 def open_webdriver(
