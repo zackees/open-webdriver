@@ -3,21 +3,30 @@ Module to download the Chromium browser from the repo.
 """
 
 import os
+import shutil
 import sys
 
 from download import download  # type: ignore
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+WDM_DIR = os.path.join(ROOT, ".wdm")
+WDM_CHROMIUM_DIR = os.path.join(WDM_DIR, "chromium")
 
 
 def get_chromium_exe() -> str:
-    """Run the unit tests."""
+    """Fetches the chromium executable."""
     url_src = f"https://github.com/zackees/open-webdriver/raw/main/chromium/{sys.platform}.zip"
-    dir_dst = os.path.join(ROOT, ".wdm", "chromium")
-    os.makedirs(dir_dst, exist_ok=True)
-    download(url=url_src, path=dir_dst, kind="zip", progressbar=True, replace=False)
-    platform_dir = os.path.join(dir_dst, sys.platform)
+    platform_dir = os.path.join(WDM_CHROMIUM_DIR, sys.platform)
+    finished_stamp = os.path.join(platform_dir, "finished")
+    if not os.path.exists(finished_stamp):
+        zip_dst = os.path.join(WDM_CHROMIUM_DIR, sys.platform + ".zip")
+        download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
+        assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
+        shutil.unpack_archive(zip_dst, WDM_CHROMIUM_DIR)
+        # Touch file.
+        with open(finished_stamp, encoding="utf-8", mode="w") as filed:
+            filed.write("")
+        os.remove(zip_dst)
     if sys.platform == "win32":
         exe_path = os.path.join(platform_dir, "chrome.exe")
     elif sys.platform == "linux":
