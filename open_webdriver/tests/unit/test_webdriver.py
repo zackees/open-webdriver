@@ -8,19 +8,10 @@ import unittest
 
 from open_webdriver.open_webdriver import open_webdriver
 
-FULL_TESTS = os.environ.get("FULL_TESTS", "0") == "0"
 
-if FULL_TESTS:
-    all_drivers = ["chrome", "firefox"]
-else:
-    all_drivers = ["chrome"]
-
-
-def do_google_test(driver_name: str, headless: bool) -> bool:
+def do_google_test(headless: bool) -> bool:
     """Runs the tests for a given driver."""
-    with open_webdriver(
-        driver_name=driver_name, headless=headless, verbose=True
-    ) as driver:
+    with open_webdriver(headless=headless, verbose=True) as driver:
         driver.get("https://www.google.com")
         return driver.title == "Google"
 
@@ -38,21 +29,19 @@ class OpenWebDriverTests(unittest.TestCase):
 
     def test_google(self) -> None:
         """Tests that google test works."""
-        for driver in all_drivers:
-            ok = do_google_test(driver, headless=False)  # pylint: disable=invalid-name
-            self.assertTrue(ok)
+        ok = do_google_test(headless=False)  # pylint: disable=invalid-name
+        self.assertTrue(ok)
 
     def test_google_headless(self) -> None:
         """Tests that google headless works."""
-        for driver in all_drivers:
-            ok = do_google_test(driver, headless=True)  # pylint: disable=invalid-name
-            self.assertTrue(ok)
+        ok = do_google_test(headless=True)  # pylint: disable=invalid-name
+        self.assertTrue(ok)
 
 
 def package_tests() -> None:
     """Package tests to be run on the command line to ensure open_webdriver works on the system."""
     try:
-        _ = do_google_test("chrome", headless=True)
+        _ = do_google_test(headless=True)
         print("\nopen_webdriver_test completed successfully.\n")
         return
     except Exception as err:  # pylint: disable=broad-except

@@ -1,0 +1,2 @@
+Linux: 101.0.4951.64 (from snap)
+Win: 101.0.4951.64 (choco install ungoogled-chromium

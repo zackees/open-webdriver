@@ -1,1 +1,0 @@
-Linux: 101.0.4951.64 (from snap)
