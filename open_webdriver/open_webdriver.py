@@ -31,6 +31,9 @@ DEFAULT_DRIVER = "chrome"
 
 CACHE_TIMEOUT = 7
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(HERE, "open_webdriver.log")
+
 
 def open_webdriver(
     driver_name: str = DEFAULT_DRIVER,
@@ -63,7 +66,7 @@ def open_webdriver(
         driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
         if verbose:
             print(f"\n  Using ChromeDriver: {driver_path}")
-        return webdriver.Chrome(driver_path, options=opts)
+        return webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
     if driver_name == "firefox":
         print(f"{__file__}: Warning: firefox browser has known issues.")
         opts = FirefoxOptions()
@@ -73,7 +76,7 @@ def open_webdriver(
         driver_path = GeckoDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
         if verbose:
             print(f"\n  Using FirefoxDriver: {driver_path}")
-        return webdriver.Firefox(executable_path=driver_path, options=opts)
+        return webdriver.Firefox(executable_path=driver_path, options=opts, log_path=LOG_FILE)
     raise NotImplementedError(
         f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox."
     )
