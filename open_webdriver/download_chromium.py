@@ -38,6 +38,7 @@ def get_chromium_exe() -> str:
         with open(finished_stamp, encoding="utf-8", mode="w") as filed:
             filed.write("")
         os.remove(zip_dst)
+    exe_path = None
     if sys.platform == "win32":
         exe_path = os.path.join(platform_dir, "chrome.exe")
     elif sys.platform == "linux":
