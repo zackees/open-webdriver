@@ -4,16 +4,17 @@
 
 # pylint: disable=protected-access
 
-import logging
 import os
 import ssl
 import sys
 from typing import Any
 
 import urllib3  # type: ignore
+from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver import FirefoxOptions
-from webdriver_setup import get_webdriver_for  # type: ignore
+from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
+from webdriver_manager.firefox import GeckoDriverManager  # type: ignore
 from webdriver_setup.driver import DriverBase as Driver  # type: ignore
 
 urllib3.disable_warnings()
@@ -28,9 +29,13 @@ if "WDM_LOCAL" not in os.environ:
 FORCE_HEADLESS = sys.platform == "linux" and "DISPLAY" not in os.environ
 DEFAULT_DRIVER = "chrome"
 
+CACHE_TIMEOUT = 7
+
 
 def open_webdriver(
-    driver_name: str = DEFAULT_DRIVER, headless: bool = True, verbose: bool = False
+    driver_name: str = DEFAULT_DRIVER,
+    headless: bool = True,
+    verbose: bool = False,  # pylint: disable=unused-argument
 ) -> Driver:
     """Opens the web driver."""
 
@@ -46,7 +51,6 @@ def open_webdriver(
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
         headless = True
-
     if driver_name in ["chrome"]:
         # For Chrome/Brave just install the driver immediately.
         opts = ChromeOptions()
@@ -56,22 +60,29 @@ def open_webdriver(
         if headless:
             opts.add_argument("--headless")
             opts.add_argument("--disable-gpu")
-    elif driver_name == "firefox":
+        driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
+        if verbose:
+            print(f"\n  Using ChromeDriver: {driver_path}")
+        return webdriver.Chrome(driver_path, options=opts)
+    if driver_name == "firefox":
         print(f"{__file__}: Warning: firefox browser has known issues.")
         opts = FirefoxOptions()
         opts.accept_insecure_certs = True
         if headless:
             opts.headless = True
-    else:
-        raise NotImplementedError(
-            f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox."
-        )
+        driver_path = GeckoDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
+        if verbose:
+            print(f"\n  Using FirefoxDriver: {driver_path}")
+        return webdriver.Firefox(executable_path=driver_path, options=opts)
+    raise NotImplementedError(
+        f"Unsupported driver name: {driver_name}. Supported drivers: chrome, firefox."
+    )
     # Don't spam the console with warnings.
-    try:
-        if not verbose:
-            logging.captureWarnings(True)
-        driver = get_webdriver_for(browser=driver_name, options=opts)
-    finally:
-        if not verbose:
-            logging.captureWarnings(False)
-    return driver
+    # try:
+    #     if not verbose:
+    #         logging.captureWarnings(True)
+    #     driver = get_webdriver_for(browser=driver_name, options=opts)
+    # finally:
+    #     if not verbose:
+    #         logging.captureWarnings(False)
+    # return driver

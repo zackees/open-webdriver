@@ -1,3 +1,2 @@
-webdriver-setup==1.1.0
 webdriver-manager==3.5.4
 selenium==3.141.0
