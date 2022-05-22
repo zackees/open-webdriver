@@ -14,7 +14,10 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 os.chdir(PROJECT_ROOT)
 
 APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
-APP_BUILD_DIR = os.path.join(PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app")
+DEFAULT_APP_BUILD_DIR = os.path.join(
+    PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
+)
+APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)
 APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
@@ -45,6 +48,7 @@ rtn = os.system(CMD_STR)
 if rtn != 0:
     print("Failed to build")
     sys.exit(rtn)
+print(f"Successfully built {APP_BUILD_DIR}")
 
 os.chdir(APP_BUILD_DIR)
 
