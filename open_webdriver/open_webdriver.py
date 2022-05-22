@@ -14,8 +14,8 @@ from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver import FirefoxOptions
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
+from webdriver_manager.driver import Driver  # type: ignore
 from webdriver_manager.firefox import GeckoDriverManager  # type: ignore
-from webdriver_setup.driver import DriverBase as Driver  # type: ignore
 
 urllib3.disable_warnings()
 
