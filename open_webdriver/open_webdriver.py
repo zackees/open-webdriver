@@ -15,7 +15,7 @@ from selenium.webdriver import ChromeOptions  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.driver import Driver  # type: ignore
 
-from .download_chromium import get_chromium_exe
+from open_webdriver.download_chromium import get_chromium_exe
 
 urllib3.disable_warnings()
 
