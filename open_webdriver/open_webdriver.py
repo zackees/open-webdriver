@@ -32,7 +32,7 @@ DEFAULT_DRIVER = "chrome"
 CACHE_TIMEOUT = 7
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LOG_FILE = os.path.join(HERE, "open_webdriver.log")
+LOG_FILE = os.path.join(os.path.dirname(HERE), "open_webdriver.log")
 
 
 def open_webdriver(
