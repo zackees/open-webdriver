@@ -69,16 +69,6 @@ def open_webdriver(
         print(f"\n  Using ChromeDriver: {driver_path}")
     return webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
 
-    # Don't spam the console with warnings.
-    # try:
-    #     if not verbose:
-    #         logging.captureWarnings(True)
-    #     driver = get_webdriver_for(browser=driver_name, options=opts)
-    # finally:
-    #     if not verbose:
-    #         logging.captureWarnings(False)
-    # return driver
-
 
 if __name__ == "__main__":
     open_webdriver()

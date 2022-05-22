@@ -15,7 +15,7 @@ WDM_CHROMIUM_DIR = os.path.join(WDM_DIR, "chromium")
 
 def _set_exe_permissions(start_dir: str) -> None:
     """Sets the permissions on the chromium executable."""
-    if sys.platform == 'win32':
+    if sys.platform == "win32":
         return
     for root, _, files in os.walk(start_dir):
         for file_name in files:
