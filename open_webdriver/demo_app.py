@@ -11,3 +11,7 @@ def main() -> None:
     with open_webdriver(headless=False) as driver:
         driver.get("https://www.google.com")
     print("Webdriver closed successfully")
+
+
+if __name__ == "__main__":
+    main()
