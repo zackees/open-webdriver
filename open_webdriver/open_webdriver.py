@@ -47,8 +47,6 @@ def open_webdriver(
     if sys.platform == "win32":
         os.environ.setdefault("PROGRAMW6432", "C:\\Program Files")
 
-    chromium_exe = get_chromium_exe()
-
     opts: Any = None
 
     if headless or FORCE_HEADLESS:
@@ -63,7 +61,9 @@ def open_webdriver(
     if headless:
         opts.add_argument("--headless")
         opts.add_argument("--disable-gpu")
-    opts.binary_location = chromium_exe
+    if sys.platform != "darwin":
+        chromium_exe = get_chromium_exe()
+        opts.binary_location = chromium_exe
     driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
