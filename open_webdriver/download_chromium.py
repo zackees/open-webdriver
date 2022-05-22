@@ -20,6 +20,8 @@ def get_chromium_exe() -> str:
     platform_dir = os.path.join(dir_dst, sys.platform)
     if sys.platform == "win32":
         exe_path = os.path.join(platform_dir, "chrome.exe")
+    elif sys.platform == "linux":
+        exe_path = os.path.join(platform_dir, "chromium")
     else:
         raise NotImplementedError(f"Unsupported platform: {sys.platform}")
     assert os.path.exists(exe_path), f"Chromium executable not found: {exe_path}"
