@@ -3,7 +3,7 @@
         "."
     ],
     "python.venvFolders": [
-        "${workspaceFolder}/prod_env",
+        "${workspaceFolder}/venv",
     ],
     "python.linting.pylintEnabled": true,
     "files.eol": "\n", // Unix

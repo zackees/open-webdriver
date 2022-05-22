@@ -29,4 +29,4 @@ def get_chromium_exe() -> str:
 
 
 if __name__ == "__main__":
-    get_chromium_exe()
+    print(get_chromium_exe())
