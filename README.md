@@ -12,6 +12,21 @@
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Nuitka/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Nuitka/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
 
+
+# Install
+
+`python -m pip install open-webdriver`
+
+# Api
+
+```
+from open_webdriver import open_webdriver
+
+with open_webdriver() as driver:
+    driver.get("https://www.google.com")
+    assert driver.title == "Google"
+```
+
 # About
 
 Yet another selenium webdriver wrapper API in python, with the aims of being the easist to use with only two lines of code to get running.
@@ -24,12 +39,14 @@ Additionally, sane defaults are set, such as headless by default and ssl certs t
 for Windows/MacOS/Ubuntu of your selenium bot with all original source code removed, making it impossible to reverse engineer.
 
 
-`open-webdriver` is essentially a wrapper around the very excellent https://pypi.org/project/webdriver-manager/ library, but with the following changes/fixes:
+`open-webdriver` is built on top of webdriver-manager https://pypi.org/project/webdriver-manager/ library, but with the following changes/fixes:
 ```
 os.environ['WDM_LOCAL'] = '1'
 os.environ['WDM_SSL_VERIFY'] = '0'
 ```
 And other sensible platform specific fixes are applied in order for the selenium driver stack to pass the test suite.
+
+Additionally, a versioned chromium binary is downloaded for Linux/Mac/Windows.
 
 When your app is launched, there will be a side folder name `.wdm` which contain the download of the webdriver used. The disk cache for the driver is set for 1 day, after which it will be checked for a new version.
 
@@ -48,21 +65,10 @@ Downsides:
 
   * Only chrome is supported right now. Firefox is experimental and is flaky on some tests/platforms. Open to pull requests if you fix this.
 
+# Version
 
+Chromium uses version: 101.0.4951.64-1
 
-# Install
-
-`python -m pip install open-webdriver`
-
-# Api
-
-```
-from open_webdriver import open_webdriver
-
-with open_webdriver() as driver:
-    driver.get("https://www.google.com")
-    assert driver.title == "Google"
-```
 
 # Tests
 
