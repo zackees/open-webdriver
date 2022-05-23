@@ -15,7 +15,8 @@ from selenium.webdriver import ChromeOptions  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.driver import Driver  # type: ignore
 
-from .download_chromium import get_chromium_exe
+from open_webdriver.download_chromium import get_chromium_exe
+from open_webdriver.path import LOG_FILE, WDM_DIR
 
 urllib3.disable_warnings()
 
@@ -23,17 +24,10 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Turn off SSL verification to allow visiting websites with self-signed certs.
 os.environ["WDM_SSL_VERIFY"] = "0"
-if "WDM_LOCAL" not in os.environ:
-    os.environ["WDM_LOCAL"] = "1"
 
 FORCE_HEADLESS = sys.platform == "linux" and "DISPLAY" not in os.environ
 
 CACHE_TIMEOUT = 7
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
-WDM_DIR = os.path.join(ROOT, ".wdm")
-LOG_FILE = os.path.join(ROOT, "open_webdriver.log")
 
 
 def open_webdriver(

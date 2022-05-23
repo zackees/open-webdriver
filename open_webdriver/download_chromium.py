@@ -8,9 +8,7 @@ import zipfile
 
 from download import download  # type: ignore
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WDM_DIR = os.path.join(ROOT, ".wdm")
-WDM_CHROMIUM_DIR = os.path.join(WDM_DIR, "chromium")
+from open_webdriver.path import WDM_CHROMIUM_DIR
 
 
 def _set_exe_permissions(start_dir: str) -> None:
