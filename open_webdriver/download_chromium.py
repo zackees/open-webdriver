@@ -33,8 +33,13 @@ def get_chromium_exe() -> str:
         download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
         assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
         print(f"Unzipping {zip_dst}")
-        with zipfile.ZipFile(zip_dst, "r") as zipf:
-            zipf.extractall(WDM_CHROMIUM_DIR)
+        try:
+            with zipfile.ZipFile(zip_dst, "r") as zipf:
+                zipf.testzip()
+                zipf.extractall(WDM_CHROMIUM_DIR)
+        except zipfile.BadZipFile:
+            print(f"Failed to unzip {zip_dst}")
+            raise
         print(f"Fixing permissions {zip_dst}")
         _set_exe_permissions(platform_dir)
         # Touch file.
