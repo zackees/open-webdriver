@@ -36,6 +36,7 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
             progressbar=True,
             replace=False,
         )
+        os.chmod(tool_dst, 0o755)
         try:
             stdout = subprocess.check_output(f"{tool_dst} --help", shell=True)
             print(stdout)
