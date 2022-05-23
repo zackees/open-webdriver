@@ -2,6 +2,7 @@
     Tests the open_webdriver package.
 """
 
+import argparse
 import unittest
 
 from open_webdriver.open_webdriver import open_webdriver
@@ -30,6 +31,19 @@ class OpenWebDriverTests(unittest.TestCase):
 
 def package_tests() -> None:
     """Package tests to be run on the command line to ensure open_webdriver works on the system."""
+    import shutil  # pylint: disable=import-outside-toplevel
+
+    from open_webdriver.path import WDM_DIR  # pylint: disable=import-outside-toplevel
+
+    parser = argparse.ArgumentParser(description="Runs the tests for open_webdriver.")
+    parser.add_argument(
+        "--delete", "-d", action="store_true", help="Deletes the .wdm cache directory."
+    )
+    args = parser.parse_args()
+    if args.delete:
+        print("Removing .wdm cache directory")
+        shutil.rmtree(WDM_DIR)
+
     try:
         _ = do_google_test(headless=True)
         print("\nopen_webdriver_test completed successfully.\n")
