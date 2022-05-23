@@ -30,14 +30,16 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
         # sudo apt-get install p7zip-full
         print("Linux detected, using 7z tool")
         try:
-            stdout = subprocess.check_output(f"7z x {zip_path} {dst_dir}", shell=True)
+            cmd = f"7z x {zip_path} {dst_dir}"
+            print(f'Executing: "{cmd}"')
+            stdout = subprocess.check_output(cmd, shell=True)
             print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
     else:
         with zipfile.ZipFile(zip_path, "r") as zipf:
             zipf.testzip()
-            zipf.extractall(zip_path)
+            zipf.extractall(dst_dir)
 
 
 def get_chromium_exe() -> str:
