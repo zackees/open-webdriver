@@ -27,7 +27,7 @@ def _unzip(zip_path: str) -> None:
 
     if sys.platform == "linux":
         print("Linux detected.")
-        url = "https://github.com/zackees/open-webdriver/raw/main/chromium/7za.zip"
+        url = "https://github.com/zackees/open-webdriver/raw/main/chromium/7za"
         dst = os.path.join(WDM_CHROMIUM_DIR, "7za")
         download(url=url, path=dst, kind="file", progressbar=True, replace=True)
         assert os.path.exists(dst), f"{dst} does not exist."
