@@ -25,6 +25,7 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
     """Unzips a zip file."""
 
     if sys.platform == "linux":
+        print("Linux detected, attemptint to use unzip cmd.")
         if 0 == os.system("unzip --help"):
             print("Using unzip.")
             rtn = os.system(f'unzip -u "{zip_path}" "{dst_dir}"')
