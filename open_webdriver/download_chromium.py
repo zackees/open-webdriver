@@ -32,7 +32,7 @@ def _unzip(zip_path: str) -> None:
             zip_name = os.path.basename(zip_path)
             cmd = f"7z x {zip_name}"
             print(f'Executing: "{cmd}"')
-            stdout = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
+            stdout, stderr = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
             print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
