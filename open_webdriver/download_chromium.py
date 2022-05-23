@@ -30,7 +30,7 @@ def _unzip(zip_path: str) -> None:
         print("Linux detected, using 7z tool")
         try:
             zip_name = os.path.basename(zip_path)
-            cmd = f"7z x {zip_name}"
+            cmd = f"7z -y x {zip_name}"
             print(f'Executing: "{cmd}"')
             stdout, stderr = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
             print(stdout)
