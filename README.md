@@ -15,6 +15,10 @@
 #### Ubuntu Install Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Test_Install/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
 
+#### Pypi published
+
+[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Upload_Python_package/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/python-publish.yml)
+
 
 # Install
 
