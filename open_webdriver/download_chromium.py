@@ -26,8 +26,12 @@ def _unzip(zip_path: str) -> None:
     """Unzips a zip file."""
 
     if sys.platform == "linux":
-        # sudo apt-get install p7zip-full
-        print("Linux detected, using 7z tool")
+        print("Linux detected.")
+        if 0 != os.system("which 7z"):
+            raise RuntimeError(
+                '7z not found. Please install it with:\n  "sudo apt-get install p7zip-full"'
+            )
+        print("Using 7z tool")
         try:
             zip_name = os.path.basename(zip_path)
             cmd = f"7z -y x {zip_name}"
