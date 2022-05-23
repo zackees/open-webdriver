@@ -3,6 +3,7 @@ Module to download the Chromium browser from the repo.
 """
 
 import os
+import subprocess
 import sys
 import zipfile
 
@@ -26,14 +27,12 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
 
     if sys.platform == "linux":
         print("Linux detected, attemptint to use unzip cmd.")
-        rtn = os.system("unzip --help")
-        if 0 == rtn:
-            print("Using unzip.")
-            rtn = os.system(f'unzip -u "{zip_path}" "{dst_dir}"')
-            if rtn == 0:
-                return
+        try:
+            subprocess.check_output(["unzip", "--help"])
+            print("unzip cmd found, so we are using it.")
+            subprocess.check_call(["unzip", "-u", zip_path, dst_dir])
+        except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
-        print(f"Falling back to python unzip, cmd unzip returned {rtn}")
 
     with zipfile.ZipFile(zip_path, "r") as zipf:
         zipf.testzip()
