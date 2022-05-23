@@ -36,6 +36,8 @@ def open_webdriver(
 ) -> Driver:
     """Opens the web driver."""
 
+    print(f"WDM_DIR: {WDM_DIR}")
+
     # Hack for windows. This is needed or else web-driver will fail to start
     # and report a very strange error that it can't find the binary. This
     # seems to happen ONLY in tox spawned tests.
