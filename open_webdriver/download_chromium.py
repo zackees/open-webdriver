@@ -32,7 +32,8 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
             print("unzip cmd found, so we are using it.")
             print(f"zip_path: {zip_path}")
             print(f"dst_dir:  {dst_dir}")
-            subprocess.check_call(["unzip", "-u", zip_path, dst_dir])
+            cmd = ["unzip", "-o", "-d", dst_dir, zip_path]
+            subprocess.check_call(" ".join(cmd), shell=True)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
 
