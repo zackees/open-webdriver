@@ -27,9 +27,11 @@ def get_chromium_exe() -> str:
     """Fetches the chromium executable."""
     url_src = f"https://github.com/zackees/open-webdriver/raw/main/chromium/{sys.platform}.zip"
     platform_dir = os.path.join(WDM_CHROMIUM_DIR, sys.platform)
+    print(f"WDM_CHROMIUM_DIR: {WDM_CHROMIUM_DIR}")
     finished_stamp = os.path.join(platform_dir, "finished")
     if not os.path.exists(finished_stamp):
         zip_dst = os.path.join(WDM_CHROMIUM_DIR, sys.platform + ".zip")
+        print(f"Download {url_src} to {zip_dst}")
         download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
         assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
         print(f"Unzipping {zip_dst}")
