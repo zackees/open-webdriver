@@ -41,10 +41,10 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
             print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
-
-    with zipfile.ZipFile(zip_path, "r") as zipf:
-        zipf.testzip()
-        zipf.extractall(dst_dir)
+    else:
+        with zipfile.ZipFile(zip_path, "r") as zipf:
+            zipf.testzip()
+            zipf.extractall(dst_dir)
 
 
 def get_chromium_exe() -> str:
