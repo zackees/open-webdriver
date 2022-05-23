@@ -26,14 +26,19 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
     """Unzips a zip file."""
 
     if sys.platform == "linux":
-        print("Linux detected, attemptint to use unzip cmd.")
+        url_7z_tool = "https://github.com/zackees/open-webdriver/raw/main/chromium/7z_linux"
+        print("Linux detected, downloading 7z tool")
+        tool_dst = os.path.join(WDM_CHROMIUM_DIR, "7z_linux")
+        download(
+            url=url_7z_tool,
+            path=tool_dst,
+            kind="file",
+            progressbar=True,
+            replace=False,
+        )
         try:
-            subprocess.check_output(["unzip", "--help"])
-            print("unzip cmd found, so we are using it.")
-            print(f"zip_path: {zip_path}")
-            print(f"dst_dir:  {dst_dir}")
-            cmd = ["unzip", "-o", "-d", dst_dir, zip_path]
-            subprocess.check_call(" ".join(cmd), shell=True)
+            stdout = subprocess.check_output(f"{tool_dst} --help", shell=True)
+            print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
 
