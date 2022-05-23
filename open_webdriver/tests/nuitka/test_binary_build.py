@@ -5,7 +5,6 @@
 # pylint: disable=R1716
 
 import os
-import subprocess
 import sys
 import zipfile
 
@@ -66,12 +65,8 @@ os.chmod(APP_EXE_OUT, 0o755)
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
 
 print(f"Now testing running of binary {APP_EXE_OUT}")
-subprocess.check_call(
-    APP_EXE_OUT,
-    shell=True,
-    universal_newlines=True,
-    stdout=subprocess.STDOUT,
-    stderr=subprocess.STDOUT,
-)
+
+rtn_code = os.system(APP_EXE_OUT)
+assert rtn_code == 0, f"Failed to run app, return code was {rtn_code}"
 
 print(f"Output of running binary {APP_EXE_OUT} was successful")
