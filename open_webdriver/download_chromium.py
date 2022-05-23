@@ -26,12 +26,14 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
 
     if sys.platform == "linux":
         print("Linux detected, attemptint to use unzip cmd.")
-        if 0 == os.system("unzip --help"):
+        rtn = os.system("unzip --help")
+        if 0 == rtn:
             print("Using unzip.")
             rtn = os.system(f'unzip -u "{zip_path}" "{dst_dir}"')
             if rtn == 0:
                 return
             print("Failed to unzip with command line, falling back to python unzip")
+        print(f"Falling back to python unzip, cmd unzip returned {rtn}")
 
     with zipfile.ZipFile(zip_path, "r") as zipf:
         zipf.testzip()
