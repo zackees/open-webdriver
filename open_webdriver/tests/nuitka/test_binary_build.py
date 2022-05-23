@@ -66,6 +66,12 @@ os.chmod(APP_EXE_OUT, 0o755)
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
 
 print(f"Now testing running of binary {APP_EXE_OUT}")
-assert 0 == subprocess.call(APP_EXE_OUT, shell=True, universal_newlines=True)
+subprocess.check_call(
+    APP_EXE_OUT,
+    shell=True,
+    universal_newlines=True,
+    stdout=subprocess.STDOUT,
+    stderr=subprocess.STDOUT,
+)
 
 print(f"Output of running binary {APP_EXE_OUT} was successful")
