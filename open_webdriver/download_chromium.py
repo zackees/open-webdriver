@@ -22,24 +22,24 @@ def _set_exe_permissions(start_dir: str) -> None:
             os.chmod(path, 0o755)
 
 
-def _unzip(zip_path: str, dst_dir: str) -> None:
+def _unzip(zip_path: str) -> None:
     """Unzips a zip file."""
 
     if sys.platform == "linux":
-        # TODO: Warn
         # sudo apt-get install p7zip-full
         print("Linux detected, using 7z tool")
         try:
-            cmd = f"7z x {zip_path} {dst_dir}"
+            zip_name = os.path.basename(zip_path)
+            cmd = f"7z x {zip_name}"
             print(f'Executing: "{cmd}"')
-            stdout = subprocess.check_output(cmd, shell=True)
+            stdout = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
             print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
     else:
         with zipfile.ZipFile(zip_path, "r") as zipf:
             zipf.testzip()
-            zipf.extractall(dst_dir)
+            zipf.extractall(os.path.dirname(zip_path))
 
 
 def get_chromium_exe() -> str:
@@ -54,7 +54,7 @@ def get_chromium_exe() -> str:
         download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
         assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
         print(f"Unzipping {zip_dst}")
-        _unzip(zip_path=zip_dst, dst_dir=WDM_CHROMIUM_DIR)
+        _unzip(zip_path=zip_dst)
         print(f"Fixing permissions {zip_dst}")
         _set_exe_permissions(platform_dir)
         # Touch file.
