@@ -16,7 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.driver import Driver  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
-from open_webdriver.path import LOG_FILE, WDM_DIR
+from open_webdriver.path import LOG_FILE, ROOT, WDM_DIR
 
 urllib3.disable_warnings()
 
@@ -36,6 +36,7 @@ def open_webdriver(
 ) -> Driver:
     """Opens the web driver."""
 
+    print(f"ROOT: {ROOT}")
     print(f"WDM_DIR: {WDM_DIR}")
 
     # Hack for windows. This is needed or else web-driver will fail to start
