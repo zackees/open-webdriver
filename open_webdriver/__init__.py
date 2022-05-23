@@ -2,12 +2,14 @@
     Module for the Open Webdriver.
 """
 
+import os
+
 from .open_webdriver import Driver  # type: ignore
 from .open_webdriver import open_webdriver
 from .path import LOG_FILE
 
-with open(LOG_FILE, encoding="utf-8", mode="w") as fild:
-    fild.write("")
+if os.path.exists(LOG_FILE):
+    os.remove(LOG_FILE)
 
 
 def test() -> None:
