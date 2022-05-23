@@ -29,16 +29,15 @@ def _unzip(zip_path: str) -> None:
         print("Linux detected.")
         url = "https://github.com/zackees/open-webdriver/raw/main/chromium/7za"
         dst = os.path.join(WDM_CHROMIUM_DIR, "7za")
-        download(url=url, path=dst, kind="file", progressbar=True, replace=True)
-        assert os.path.exists(dst), f"{dst} does not exist."
+        path_7za = download(url=url, path=dst, kind="file", progressbar=True, replace=True)
+        path_7za = os.path.abspath(path_7za)
+        assert os.path.exists(path_7za), f"{path_7za} does not exist."
         # Add executable permissions.
-        os.chmod(dst, 0o755)
-        # Add the path to the current path.
-        os.environ["PATH"] += os.pathsep + dst
+        os.chmod(path_7za, 0o755)
         print("Using 7za tool")
         try:
             zip_name = os.path.basename(zip_path)
-            cmd = f"7za -y x {zip_name}"
+            cmd = f"{path_7za} -y x {zip_name}"
             print(f'Executing: "{cmd}"')
             _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
         except subprocess.CalledProcessError:
