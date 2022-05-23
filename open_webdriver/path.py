@@ -4,7 +4,7 @@ Paths for the project.
 
 import os
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(__file__))
 WDM_DIR = os.path.join(ROOT, ".wdm")
 WDM_CHROMIUM_DIR = os.path.join(WDM_DIR, "chromium")
 LOG_FILE = os.path.join(ROOT, "open_webdriver.log")
