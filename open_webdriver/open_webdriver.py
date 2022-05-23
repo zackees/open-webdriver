@@ -32,6 +32,7 @@ CACHE_TIMEOUT = 7
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+WDM_DIR = os.path.join(ROOT, ".wdm")
 LOG_FILE = os.path.join(ROOT, "open_webdriver.log")
 
 
@@ -64,7 +65,7 @@ def open_webdriver(
     if sys.platform != "darwin":
         chromium_exe = get_chromium_exe()
         opts.binary_location = chromium_exe
-    driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT).install()
+    driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT, path=WDM_DIR).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
     return webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
