@@ -99,7 +99,8 @@ Pull requests are welcome for this code base. When you submit your pull request 
 
 # Changes
 
-  * 1.2.00: All platforms supported now. Linux / Win32 now downloads a chromioum browser. Firefox has been removed.
+  * 1.2.1: Bug fixes and other improvements that easy deployment.
+  * 1.2.0: All platforms supported now. Linux / Win32 now downloads a chromioum browser. Firefox has been removed.
   * 1.1.14: Fixes bugs for `open_webdriver_test` cmd
   * 1.1.10: Adds package test `open_webdriver_test` cmd
   * 1.1.9: Moves tests into package to allow running tests from package.
