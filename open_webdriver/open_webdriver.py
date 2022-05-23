@@ -36,7 +36,7 @@ def open_webdriver(
 ) -> Driver:
     """Opens the web driver."""
 
-    print(f"ROOT: {ROOT}")
+    print(f"ROOT: {ROOT} => {os.path.abspath(ROOT)}")
     print(f"WDM_DIR: {WDM_DIR}")
 
     # Hack for windows. This is needed or else web-driver will fail to start
