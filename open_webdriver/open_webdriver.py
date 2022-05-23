@@ -35,14 +35,7 @@ def open_webdriver(
     verbose: bool = False,  # pylint: disable=unused-argument
 ) -> Driver:
     """Opens the web driver."""
-    # Hack for windows. This is needed or else web-driver will fail to start
-    # and report a very strange error that it can't find the binary. This
-    # seems to happen ONLY in tox spawned tests.
-    if sys.platform == "win32":
-        os.environ.setdefault("PROGRAMW6432", "C:\\Program Files")
-
     opts: Any = None
-
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")

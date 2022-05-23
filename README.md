@@ -41,14 +41,14 @@ for Windows/MacOS/Ubuntu of your selenium bot with all original source code remo
 
 `open-webdriver` is built on top of webdriver-manager https://pypi.org/project/webdriver-manager/ library, but with the following changes/fixes:
 ```
-os.environ['WDM_LOCAL'] = '1'
 os.environ['WDM_SSL_VERIFY'] = '0'
 ```
+
 And other sensible platform specific fixes are applied in order for the selenium driver stack to pass the test suite.
 
-Additionally, a versioned chromium binary is downloaded for Linux/Mac/Windows.
+Additionally, a versioned chromium binary is downloaded for Linux & Windows, while whatever Chrome system is used for Mac, due to app signing requirements.
 
-When your app is launched, there will be a side folder name `.wdm` which contain the download of the webdriver used. The disk cache for the driver is set for 1 day, after which it will be checked for a new version.
+When your app is launched, there will be a side folder name `.wdm` which contain the download of the webdriver used and brawser used. The disk cache for the driver is set for 7 day, after which it will be checked for a new version.
 
 Benefits:
 
@@ -63,7 +63,7 @@ Benefits:
 
 Downsides:
 
-  * Only chrome is supported right now. Firefox is experimental and is flaky on some tests/platforms. Open to pull requests if you fix this.
+  * Only chrome is supported right now.
 
 # Version
 
@@ -99,6 +99,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
 
 # Changes
 
+  * 1.2.00: All platforms supported now. Linux / Win32 now downloads a chromioum browser. Firefox has been removed.
   * 1.1.14: Fixes bugs for `open_webdriver_test` cmd
   * 1.1.10: Adds package test `open_webdriver_test` cmd
   * 1.1.9: Moves tests into package to allow running tests from package.
