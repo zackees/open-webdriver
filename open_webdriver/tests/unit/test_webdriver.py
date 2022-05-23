@@ -5,6 +5,7 @@
 import unittest
 
 from open_webdriver.open_webdriver import open_webdriver
+from open_webdriver.path import LOG_FILE
 
 
 def do_google_test(headless: bool) -> bool:
@@ -30,25 +31,11 @@ class OpenWebDriverTests(unittest.TestCase):
 
 def package_tests() -> None:
     """Package tests to be run on the command line to ensure open_webdriver works on the system."""
-
     try:
         _ = do_google_test(headless=True)
         print("\nopen_webdriver_test completed successfully.\n")
-        return
     except Exception as err:  # pylint: disable=broad-except
-        from open_webdriver.path import (  # pylint: disable=import-outside-toplevel
-            LOG_FILE,
-        )
-
-        try:
-            with open(LOG_FILE, encoding="utf-8", mode="r") as filed:
-                print(filed.read())
-        except Exception as err2:  # pylint: disable=broad-except
-            print(f"Error reading log file {LOG_FILE} because {err2}")
-
-        print(f"{__file__}: Error: {err}")
-        print("\n  FAILED: open_webdriver_test")
-        return
+        print(f"\nFAILED: open_webdriver_test because of {err}")
 
 
 def main():

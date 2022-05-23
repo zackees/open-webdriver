@@ -54,7 +54,13 @@ def open_webdriver(
     driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT, path=WDM_DIR).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
-    return webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
+    try:
+        driver = webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
+        return driver
+    except Exception as err:  # pylint: disable=broad-except
+        print(f"{__file__}: Error: {err}")
+        print(f"Please see:\n  {LOG_FILE}")
+        raise
 
 
 if __name__ == "__main__":
