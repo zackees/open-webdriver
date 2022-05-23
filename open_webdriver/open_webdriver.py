@@ -16,7 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.driver import Driver  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
-from open_webdriver.path import LOG_FILE, ROOT, WDM_DIR
+from open_webdriver.path import LOG_FILE, WDM_DIR
 
 urllib3.disable_warnings()
 
@@ -35,10 +35,6 @@ def open_webdriver(
     verbose: bool = False,  # pylint: disable=unused-argument
 ) -> Driver:
     """Opens the web driver."""
-
-    print(f"ROOT: {ROOT} => {os.path.abspath(ROOT)}")
-    print(f"WDM_DIR: {WDM_DIR}")
-
     # Hack for windows. This is needed or else web-driver will fail to start
     # and report a very strange error that it can't find the binary. This
     # seems to happen ONLY in tox spawned tests.
