@@ -7,10 +7,15 @@
 import os
 import sys
 import zipfile
+from pprint import pprint
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 
+print("os.environ:")
+pprint(dict(os.environ))
+
+print(f"Changing directory to {PROJECT_ROOT}")
 os.chdir(PROJECT_ROOT)
 
 APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
@@ -62,7 +67,9 @@ assert os.path.exists(APP_EXE_OUT)
 
 os.chmod(APP_EXE_OUT, 0o755)
 
-print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
+print(
+    f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n'
+)
 
 print(f"Now testing running of binary {APP_EXE_OUT}")
 
