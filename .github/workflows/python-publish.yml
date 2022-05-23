@@ -9,17 +9,17 @@
 name: Upload_Python_package
 
 on:
-  release:
-    types: [published]
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 permissions:
   contents: read
 
 jobs:
-  deploy:
-
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -35,5 +35,6 @@ jobs:
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
+        tag_name: ${{ github.ref }}
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
