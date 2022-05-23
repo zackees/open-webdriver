@@ -35,10 +35,10 @@ def _unzip(zip_path: str) -> None:
         os.chmod(dst, 0o755)
         # Add the path to the current path.
         os.environ["PATH"] += os.pathsep + dst
-        print("Using 7z tool")
+        print("Using 7za tool")
         try:
             zip_name = os.path.basename(zip_path)
-            cmd = f"7z -y x {zip_name}"
+            cmd = f"7za -y x {zip_name}"
             print(f'Executing: "{cmd}"')
             _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
         except subprocess.CalledProcessError:
