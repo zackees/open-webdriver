@@ -26,26 +26,18 @@ def _unzip(zip_path: str, dst_dir: str) -> None:
     """Unzips a zip file."""
 
     if sys.platform == "linux":
-        url_7z_tool = "https://github.com/zackees/open-webdriver/raw/main/chromium/7z_linux"
-        print("Linux detected, downloading 7z tool")
-        tool_dst = os.path.join(WDM_CHROMIUM_DIR, "7z_linux")
-        download(
-            url=url_7z_tool,
-            path=tool_dst,
-            kind="file",
-            progressbar=True,
-            replace=False,
-        )
-        os.chmod(tool_dst, 0o755)
+        # TODO: Warn
+        # sudo apt-get install p7zip-full
+        print("Linux detected, using 7z tool")
         try:
-            stdout = subprocess.check_output(f"{tool_dst} --help", shell=True)
+            stdout = subprocess.check_output(f"7z x {zip_path} {dst_dir}", shell=True)
             print(stdout)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
     else:
         with zipfile.ZipFile(zip_path, "r") as zipf:
             zipf.testzip()
-            zipf.extractall(dst_dir)
+            zipf.extractall(zip_path)
 
 
 def get_chromium_exe() -> str:
