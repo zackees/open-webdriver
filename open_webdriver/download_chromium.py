@@ -27,10 +27,14 @@ def _unzip(zip_path: str) -> None:
 
     if sys.platform == "linux":
         print("Linux detected.")
-        if 0 != os.system("which 7z"):
-            raise RuntimeError(
-                '7z not found. Please install it with:\n  "sudo apt-get install p7zip-full"'
-            )
+        url = "https://github.com/zackees/open-webdriver/raw/main/chromium/7za.zip"
+        dst = os.path.join(WDM_CHROMIUM_DIR, "7za")
+        download(url=url, path=dst, kind="file", progressbar=True, replace=True)
+        assert os.path.exists(dst), f"{dst} does not exist."
+        # Add executable permissions.
+        os.chmod(dst, 0o755)
+        # Add the path to the current path.
+        os.environ["PATH"] += os.pathsep + dst
         print("Using 7z tool")
         try:
             zip_name = os.path.basename(zip_path)
