@@ -21,6 +21,22 @@ def _set_exe_permissions(start_dir: str) -> None:
             os.chmod(path, 0o755)
 
 
+def _unzip(zip_path: str, dst_dir: str) -> None:
+    """Unzips a zip file."""
+
+    if sys.platform == "linux":
+        if 0 == os.system("unzip --version"):
+            print("Using unzip.")
+            rtn = os.system(f'unzip -u "{zip_path}" "{dst_dir}"')
+            if rtn == 0:
+                return
+            print("Failed to unzip with command line, falling back to python unzip")
+
+    with zipfile.ZipFile(zip_path, "r") as zipf:
+        zipf.testzip()
+        zipf.extractall(dst_dir)
+
+
 def get_chromium_exe() -> str:
     """Fetches the chromium executable."""
     url_src = f"https://github.com/zackees/open-webdriver/raw/main/chromium/{sys.platform}.zip"
@@ -33,13 +49,7 @@ def get_chromium_exe() -> str:
         download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
         assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
         print(f"Unzipping {zip_dst}")
-        try:
-            with zipfile.ZipFile(zip_dst, "r") as zipf:
-                zipf.testzip()
-                zipf.extractall(WDM_CHROMIUM_DIR)
-        except zipfile.BadZipFile:
-            print(f"Failed to unzip {zip_dst}")
-            raise
+        _unzip(zip_path=zip_dst, dst_dir=WDM_CHROMIUM_DIR)
         print(f"Fixing permissions {zip_dst}")
         _set_exe_permissions(platform_dir)
         # Touch file.

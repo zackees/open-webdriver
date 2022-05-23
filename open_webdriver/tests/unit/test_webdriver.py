@@ -2,8 +2,6 @@
     Tests the open_webdriver package.
 """
 
-import os
-import sys
 import unittest
 
 from open_webdriver.open_webdriver import open_webdriver
@@ -18,14 +16,6 @@ def do_google_test(headless: bool) -> bool:
 
 class OpenWebDriverTests(unittest.TestCase):
     """Tester for open_webdriver.py"""
-
-    @unittest.skipIf(sys.platform != "win32", "Windows only tests")
-    def test_win32_bug(self) -> None:
-        """Asserts that the win32 bug is fixed."""
-        with open_webdriver():
-            pass
-        # This environmental variable should be available now.
-        self.assertIn("PROGRAMW6432", os.environ)
 
     def test_google(self) -> None:
         """Tests that google test works."""
