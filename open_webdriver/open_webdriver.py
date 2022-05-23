@@ -38,7 +38,7 @@ def open_webdriver(
     """Opens the web driver."""
     if sys.platform == "linux":
         if os.geteuid() == 0:
-            print("\n\n  WARNING: Running as root. The driver may crash!")
+            print("\n\n  WARNING: Running as root. The driver may crash!\n\n")
             time.sleep(3)
     opts: Any = None
     if headless or FORCE_HEADLESS:
