@@ -3,8 +3,8 @@ Module to download the Chromium browser from the repo.
 """
 
 import os
-import shutil
 import sys
+import zipfile
 
 from download import download  # type: ignore
 
@@ -32,7 +32,8 @@ def get_chromium_exe() -> str:
         zip_dst = os.path.join(WDM_CHROMIUM_DIR, sys.platform + ".zip")
         download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
         assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
-        shutil.unpack_archive(zip_dst, WDM_CHROMIUM_DIR)
+        with zipfile.ZipFile(zip_dst, "r") as zipf:
+            zipf.extractall(WDM_CHROMIUM_DIR)
         _set_exe_permissions(platform_dir)
         # Touch file.
         with open(finished_stamp, encoding="utf-8", mode="w") as filed:
