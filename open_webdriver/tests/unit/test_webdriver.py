@@ -5,7 +5,6 @@
 import unittest
 
 from open_webdriver.open_webdriver import open_webdriver
-from open_webdriver.path import LOG_FILE
 
 
 def do_google_test(headless: bool) -> bool:

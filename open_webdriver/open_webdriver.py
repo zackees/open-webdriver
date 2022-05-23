@@ -7,6 +7,7 @@
 import os
 import ssl
 import sys
+import time
 from typing import Any
 
 import urllib3  # type: ignore
@@ -35,6 +36,10 @@ def open_webdriver(
     verbose: bool = False,  # pylint: disable=unused-argument
 ) -> Driver:
     """Opens the web driver."""
+    if sys.platform == "linux":
+        if os.geteuid() == 0:
+            print("\n\n  WARNING: Running as root. The driver may crash!")
+            time.sleep(3)
     opts: Any = None
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
