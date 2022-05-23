@@ -99,6 +99,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
 
 # Changes
 
+  * 1.2.3: Fix bug in 7za unarchiver path.
   * 1.2.2: 7za unarchiver is now included.
   * 1.2.1: Bug fixes and other improvements that easy deployment.
   * 1.2.0: All platforms supported now. Linux / Win32 now downloads a chromioum browser. Firefox has been removed.
