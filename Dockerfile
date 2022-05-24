@@ -1,5 +1,6 @@
 # FROM ubuntu:22.04
-FROM python:3.10
+FROM python:3.10.4
+
 
 # Might be necessary.
 ENV LC_ALL=C.UTF-8
