@@ -3,7 +3,8 @@ version: '3.9'
 services:
   webdriver:
     build: .
-    shm_size: 2gb
+    # Disabled for now, but might need it again in the future.
+    # shm_size: 2gb
     ports:
       - published: 80
         target: 80
