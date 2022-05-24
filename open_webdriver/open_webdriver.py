@@ -8,6 +8,7 @@ import os
 import ssl
 import sys
 import time
+import traceback
 from typing import Any
 
 import urllib3  # type: ignore
@@ -66,6 +67,7 @@ def open_webdriver(
         driver = webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
         return driver
     except Exception as err:  # pylint: disable=broad-except
+        traceback.print_exc()
         print(f"{__file__}: Error: {err}")
         print(f"Please see:\n  {LOG_FILE}")
         raise
