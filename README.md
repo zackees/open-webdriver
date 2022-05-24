@@ -84,6 +84,10 @@ Just simply run `tox` at the command line and everything should be tested. You m
 Run `open_webdriver_test` for package tests. This is useful if you are on a server and want to figure out if open_webdriver will be able to be run in
 headless mode using the `chrome` driver.
 
+# Docker
+
+Docker is supported in this build. Please see the `Dockerfile` and `docker-compose.yml` for bringup instructions. Simply use `docker-compose up` and then ssh into the docker instance and run `open_webdriver_test` and verify that the test completes normally.
+
 # Nuitka
 
 This package supports the Nuitka cross compiler to binary app. However to make this work YOU MUST include the package data for selenium or you will get errors about missing javascript files when the program loads. To get around this you'll need to add package data:
@@ -102,6 +106,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
 
 # Changes
 
+  * 1.2.8: Docker support has been added.
   * 1.2.3: Fix bug in 7za unarchiver path.
   * 1.2.2: 7za unarchiver is now included.
   * 1.2.1: Bug fixes and other improvements that easy deployment.
