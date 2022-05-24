@@ -39,4 +39,4 @@ EXPOSE 80
 
 #Blah
 #CMD ["python", "-m", "http.server", "80"]
-CMD /bin/bash
+CMD python -m http.server 80
