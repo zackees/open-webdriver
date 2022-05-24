@@ -25,18 +25,14 @@ COPY requirements.txt .
 COPY requirements.testing.txt .
 COPY setup.py .
 COPY README.md .
-
-
+# Remove some files not necessary.
 RUN rm -rf /open_webdriver/tests/nuitka
 RUN rm -f /open_webdriver/open_webdriver.log
 
-# Install all the dependencies as it's own layer.
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m pip install -e .
 
-# RUN useradd -u 1111 admin
-# Change to non-root privilege
-# USER admin
+ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
 # Expose the port and then launch the app.
 EXPOSE 80
