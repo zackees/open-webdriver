@@ -26,6 +26,10 @@ COPY requirements.testing.txt .
 COPY setup.py .
 COPY README.md .
 
+
+RUN rm -rf /open_webdriver/tests/nuitka
+RUN rm -f /open_webdriver/open_webdriver.log
+
 # Install all the dependencies as it's own layer.
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m pip install -e .
