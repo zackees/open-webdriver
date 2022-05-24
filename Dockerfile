@@ -20,10 +20,13 @@ RUN apt-get install -y ca-certificates
 
 WORKDIR /open_webdriver
 # Add requirements file and install.
-COPY . .
+COPY open_webdriver ./open_webdriver
+COPY requirements.txt .
+COPY requirements.testing.txt .
+COPY setup.py .
+COPY README.md .
 
 # Install all the dependencies as it's own layer.
-COPY ./requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m pip install -e .
 
