@@ -37,13 +37,13 @@ def open_webdriver(
     verbose: bool = False,  # pylint: disable=unused-argument
 ) -> Driver:
     """Opens the web driver."""
-    if sys.platform == "linux":
-        if os.geteuid() == 0:
-            print("\n\n  WARNING: Running as root. The driver may crash!\n\n")
-            time.sleep(3)
+
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     with open(LOG_FILE, encoding="utf-8", mode="w") as filed:
         filed.write(f"{__file__}: Starting up web driver.\n")
+        if sys.platform == "linux":
+            if os.geteuid() == 0:
+                filed("\n\n  WARNING: Running as root. The driver may crash!\n\n")
     opts: Any = None
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
