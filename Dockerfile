@@ -1,5 +1,5 @@
 # FROM ubuntu:22.04
-FROM python:3.10.4
+FROM python:3.10.4-slim-bullseye
 
 
 # Might be necessary.
