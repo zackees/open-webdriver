@@ -1,5 +1,7 @@
 """
-    Demo app build in nuitka.
+    Demo app build in nuitka. This builds a single file binary which is self signed and
+    can be distributed. To build for a platform, you must have that platform. So Windows
+    can build for win32 platform, MacOS for darwin and Linux for Linux.
 """
 
 # pylint: disable=R1716
@@ -11,6 +13,15 @@ from pprint import pprint
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
+DEFAULT_APP_BUILD_DIR = os.path.join(
+    PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
+)
+APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR) # gh_actions
+APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
+if sys.platform == "win32":
+    APP_NAME += ".exe"
+APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}"
 
 print("os.environ:")
 pprint(dict(os.environ))
@@ -18,16 +29,6 @@ pprint(dict(os.environ))
 print(f"Changing directory to {PROJECT_ROOT}")
 os.chdir(PROJECT_ROOT)
 
-APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
-DEFAULT_APP_BUILD_DIR = os.path.join(
-    PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
-)
-APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)
-APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
-if sys.platform == "win32":
-    APP_NAME += ".exe"
-
-APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}"
 CMD = [
     "pip install -r requirements.nuitka.txt",
     "&&",
@@ -38,7 +39,7 @@ CMD = [
     "--follow-imports",
     "--standalone",
     "--python-flag=-OO",  # Strips comments
-    "--include-package-data=selenium",
+    "--include-package-data=selenium",  # For html/js/css resources
     f"--output-dir={APP_BUILD_DIR}",
     APP_SRC,
     "--onefile",
@@ -65,7 +66,7 @@ expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
 assert os.path.exists(expected_zip_file)
 assert os.path.exists(APP_EXE_OUT)
 
-os.chmod(APP_EXE_OUT, 0o755)
+os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
 
 print(
     f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n'
