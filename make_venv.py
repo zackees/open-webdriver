@@ -19,6 +19,7 @@ import sys
 # This activation script adds the ability to run it from any path and also
 # aliasing pip3 and python3 to pip/python so that this works across devices.
 _ACTIVATE_SH = """
+#! /bin/bash
 function abs_path {
   (cd "$(dirname '$1')" &>/dev/null && printf "%s/%s" "$PWD" "${1##*/}")
 }
@@ -61,6 +62,7 @@ if not os.path.exists("venv"):
         _exe('mklink /J "%s" "%s"' % (link, target))
     with open("activate.sh", "wt") as fd:
         fd.write(_ACTIVATE_SH)
+    os.chmod("activate.sh", 0o755)
 else:
     print("%s already exists" % os.path.abspath("venv"))
 
