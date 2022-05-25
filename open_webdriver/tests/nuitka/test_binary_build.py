@@ -17,7 +17,7 @@ APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
 DEFAULT_APP_BUILD_DIR = os.path.join(
     PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
 )
-APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR) # gh_actions
+APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)  # gh_actions
 APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
 if sys.platform == "win32":
     APP_NAME += ".exe"
@@ -68,9 +68,7 @@ assert os.path.exists(APP_EXE_OUT)
 
 os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
 
-print(
-    f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n'
-)
+print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
 
 print(f"Now testing running of binary {APP_EXE_OUT}")
 
