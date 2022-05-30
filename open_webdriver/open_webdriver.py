@@ -10,6 +10,7 @@ import sys
 import traceback
 from typing import Any
 
+import filelock  # type: ignore
 import urllib3  # type: ignore
 from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
@@ -28,15 +29,21 @@ os.environ["WDM_SSL_VERIFY"] = "0"
 
 FORCE_HEADLESS = sys.platform == "linux" and "DISPLAY" not in os.environ
 
-CACHE_TIMEOUT = 7
+CACHE_TIMEOUT_DAYS = 7
+
+os.makedirs(WDM_DIR, exist_ok=True)
+LOCK_FILE = os.path.join(WDM_DIR, "lock.file")
+LOCK = filelock.FileLock(LOCK_FILE)
+
+INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
 
 def open_webdriver(
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
+    timeout: float = INSTALL_TIMEOUT,
 ) -> Driver:
     """Opens the web driver."""
-
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     with open(LOG_FILE, encoding="utf-8", mode="w") as filed:
         filed.write(f"{__file__}: Starting up web driver.\n")
@@ -56,12 +63,13 @@ def open_webdriver(
     if headless:
         opts.add_argument("--headless")
         opts.add_argument("--disable-gpu")
-    if sys.platform != "darwin":
-        chromium_exe = get_chromium_exe()
-        opts.binary_location = chromium_exe
-    driver_path = ChromeDriverManager(
-        cache_valid_range=CACHE_TIMEOUT, version="101.0.4951.41", path=WDM_DIR
-    ).install()
+    with LOCK.acquire(timeout=timeout):
+        if sys.platform != "darwin":
+            chromium_exe = get_chromium_exe()
+            opts.binary_location = chromium_exe
+        driver_path = ChromeDriverManager(
+            cache_valid_range=CACHE_TIMEOUT_DAYS, version="101.0.4951.41", path=WDM_DIR
+        ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
     try:
