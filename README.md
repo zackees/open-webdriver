@@ -106,6 +106,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
 
 # Changes
 
+  * 1.2.9: Sets downloaded chromedriver version to 101.0.4951.41
   * 1.2.8: Docker support has been added.
   * 1.2.3: Fix bug in 7za unarchiver path.
   * 1.2.2: 7za unarchiver is now included.

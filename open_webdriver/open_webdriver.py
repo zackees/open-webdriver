@@ -59,7 +59,9 @@ def open_webdriver(
     if sys.platform != "darwin":
         chromium_exe = get_chromium_exe()
         opts.binary_location = chromium_exe
-    driver_path = ChromeDriverManager(cache_valid_range=CACHE_TIMEOUT, path=WDM_DIR).install()
+    driver_path = ChromeDriverManager(
+        cache_valid_range=CACHE_TIMEOUT, version="101.0.4951.41", path=WDM_DIR
+    ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
     try:
