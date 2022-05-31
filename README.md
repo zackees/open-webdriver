@@ -86,6 +86,8 @@ headless mode using the `chrome` driver.
 
 # Docker
 
+Please see `Dockerfile` for requirements for including `open_webdriver` in your Docker app.
+
 Docker is supported in this build. Please see the `Dockerfile` and `docker-compose.yml` for bringup instructions. Simply use `docker-compose up` and then ssh into the docker instance and run `open_webdriver_test` and verify that the test completes normally.
 
 # Nuitka
