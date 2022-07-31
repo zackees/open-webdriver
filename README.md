@@ -97,7 +97,7 @@ This package supports the Nuitka cross compiler to binary app. However to make t
 `python -m nuitka --include-package-data=selenium ...`
 
 For example see the example build file:
-[https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/tests/nuitka/test_binary_build.py)
+[https://github.com/zackees/open-webdriver/blob/main/open_webdriver/tests/nuitka/test_binary_build.py](https://github.com/zackees/open-webdriver/blob/main/open_webdriver/tests/nuitka/test_binary_build.py)
 
 # Pull Requests
 
