@@ -43,6 +43,7 @@ def open_webdriver(
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
     disable_gpu: bool | None = None,
+    disable_dev_shm_usage: bool = True,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
@@ -60,7 +61,8 @@ def open_webdriver(
     opts = ChromeOptions()
     opts.add_argument("--ignore-certificate-errors")
     opts.add_argument("--no-sandbox")
-    opts.add_argument("--disable-dev-shm-usage")
+    if disable_dev_shm_usage:
+        opts.add_argument("--disable-dev-shm-usage")
     if headless:
         opts.add_argument("--headless")
         if disable_gpu is None or disable_gpu is True:
