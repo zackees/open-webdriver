@@ -19,7 +19,7 @@ def do_google_test() -> bool:
 class ConcurrentTests(unittest.TestCase):
     """Tester for open_webdriver.py"""
 
-    def test_concurrent(self) -> None:  # pylint: disable=no-self-use
+    def test_concurrent(self) -> None:
         """Tests that google test works."""
 
         # Create a thread that runs the function.

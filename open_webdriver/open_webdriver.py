@@ -42,7 +42,7 @@ def open_webdriver(
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
-    disable_gpu: bool = None,
+    disable_gpu: bool | None = None,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
