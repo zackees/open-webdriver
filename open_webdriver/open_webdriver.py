@@ -42,6 +42,7 @@ def open_webdriver(
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
+    disable_gpu: bool = None,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
@@ -62,7 +63,8 @@ def open_webdriver(
     opts.add_argument("--disable-dev-shm-usage")
     if headless:
         opts.add_argument("--headless")
-        opts.add_argument("--disable-gpu")
+        if disable_gpu is None or disable_gpu is True:
+            opts.add_argument("--disable-gpu")
     with LOCK.acquire(timeout=timeout):
         if sys.platform != "darwin":
             chromium_exe = get_chromium_exe()
