@@ -107,7 +107,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
-
+  * 1.3.1: Adds disable gpu.
   * 1.3.0: Concurrent support added for open_webdriver() using a lockfile.
   * 1.2.9: Sets downloaded chromedriver version to 101.0.4951.41
   * 1.2.8: Docker support has been added.
