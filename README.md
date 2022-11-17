@@ -22,7 +22,7 @@
 
 # Api
 
-```
+```python
 from open_webdriver import open_webdriver
 
 with open_webdriver() as driver:
@@ -43,7 +43,7 @@ for Windows/MacOS/Ubuntu of your selenium bot with all original source code remo
 
 
 `open-webdriver` is built on top of webdriver-manager https://pypi.org/project/webdriver-manager/ library, but with the following changes/fixes:
-```
+```python
 os.environ['WDM_SSL_VERIFY'] = '0'
 ```
 
