@@ -38,12 +38,13 @@ LOCK = filelock.FileLock(LOCK_FILE)
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
 
-def open_webdriver(
+def open_webdriver(  # pylint: disable=too-many-arguments
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
     disable_gpu: bool | None = None,
     disable_dev_shm_usage: bool = True,
+    user_agent: str | None = None,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
@@ -67,6 +68,8 @@ def open_webdriver(
         opts.add_argument("--headless")
         if disable_gpu is None or disable_gpu is True:
             opts.add_argument("--disable-gpu")
+    if user_agent:
+        opts.add_argument(f"--user-agent={user_agent}")
     with LOCK.acquire(timeout=timeout):
         if sys.platform != "darwin":
             chromium_exe = get_chromium_exe()
