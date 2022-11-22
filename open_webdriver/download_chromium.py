@@ -42,7 +42,18 @@ def _unzip(zip_path: str) -> None:
             _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
         except subprocess.CalledProcessError:
             print("Failed to unzip with command line, falling back to python unzip")
+    elif sys.platform == "darwin":
+        print("MacOS detected.")
+        dir_path = os.path.dirname(zip_path)
+        os.makedirs(dir_path, exist_ok=True)
+        cmd = f'py7zr x "{zip_path}" "{dir_path}"'
+        print(f'Executing: "{cmd}"')
+        try:
+            _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
+        except subprocess.CalledProcessError:
+            print(f"Failed to un7z with command line {cmd}")
     else:
+        print("Windows detected.")
         with zipfile.ZipFile(zip_path, "r") as zipf:
             zipf.testzip()
             zipf.extractall(os.path.dirname(zip_path))
@@ -50,33 +61,39 @@ def _unzip(zip_path: str) -> None:
 
 def get_chromium_exe() -> str:
     """Fetches the chromium executable."""
-    url_src = f"https://github.com/zackees/open-webdriver/raw/main/chromium/{sys.platform}.zip"
+    ext = ".7z" if sys.platform == "darwin" else ".zip"
+    url_src = f"https://github.com/zackees/open-webdriver/raw/main/chromium/{sys.platform}{ext}"
     platform_dir = os.path.join(WDM_CHROMIUM_DIR, sys.platform)
     print(f"WDM_CHROMIUM_DIR: {WDM_CHROMIUM_DIR}")
     finished_stamp = os.path.join(platform_dir, "finished")
     if not os.path.exists(finished_stamp):
-        zip_dst = os.path.join(WDM_CHROMIUM_DIR, sys.platform + ".zip")
-        print(f"Download {url_src} to {zip_dst}")
-        download(url=url_src, path=zip_dst, kind="file", progressbar=True, replace=False)
-        assert os.path.exists(zip_dst), f"{zip_dst} does not exist."
-        print(f"Unzipping {zip_dst}")
-        _unzip(zip_path=zip_dst)
-        print(f"Fixing permissions {zip_dst}")
+        ext = ".7z" if sys.platform == "darwin" else ".zip"
+        archive_dst = platform_dir + ext
+        print(f"Download {url_src} to {archive_dst}")
+        download(url=url_src, path=archive_dst, kind="file", progressbar=True, replace=False)
+        assert os.path.exists(archive_dst), f"{archive_dst} does not exist."
+        print(f"Unzipping {archive_dst}")
+        _unzip(zip_path=archive_dst)
+        print(f"Fixing permissions {platform_dir}")
         _set_exe_permissions(platform_dir)
         # Touch file.
-        print("Touching file.")
+        print(f"Touching file: {finished_stamp}")
+        os.makedirs(os.path.dirname(finished_stamp), exist_ok=True)
         with open(finished_stamp, encoding="utf-8", mode="w") as filed:
             filed.write("")
-        print(f"Removing {zip_dst}")
-        os.remove(zip_dst)
+        print(f"Removing {archive_dst}")
+        os.remove(archive_dst)
     exe_path = None
     if sys.platform == "win32":
         exe_path = os.path.join(platform_dir, "chrome.exe")
     elif sys.platform == "linux":
         exe_path = os.path.join(platform_dir, "chrome")
+    elif sys.platform == "darwin":
+        exe_path = os.path.join(platform_dir, "Chromium.app")
     else:
         raise NotImplementedError(f"Unsupported platform: {sys.platform}")
-    assert os.path.exists(exe_path), f"Chromium executable not found: {exe_path}"
+    print(f"Chromium executable: {exe_path}")
+    assert os.path.exists(exe_path), f"Chromium executable not found: {os.path.abspath(exe_path)}"
     return exe_path
 
 

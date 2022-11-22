@@ -15,7 +15,7 @@ import urllib3  # type: ignore
 from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
-from webdriver_manager.driver import Driver  # type: ignore
+from webdriver_manager.core.driver import Driver  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR
@@ -33,7 +33,6 @@ CACHE_TIMEOUT_DAYS = 7
 
 os.makedirs(WDM_DIR, exist_ok=True)
 LOCK_FILE = os.path.join(WDM_DIR, "lock.file")
-LOCK = filelock.FileLock(LOCK_FILE)
 
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
@@ -70,17 +69,19 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
             opts.add_argument("--disable-gpu")
     if user_agent:
         opts.add_argument(f"--user-agent={user_agent}")
-    with LOCK.acquire(timeout=timeout):
-        if sys.platform != "darwin":
-            if verbose:
-                print("  Installing web driver...")
-            chromium_exe = get_chromium_exe()
-            if verbose:
-                print("  Finished installing web driver: ", chromium_exe)
-            opts.binary_location = chromium_exe
-        version = "latest" if sys.platform == "darwin" else "101.0.4951.41"
+    lock = filelock.FileLock(LOCK_FILE)
+    with lock.acquire(timeout=timeout):
+        if verbose:
+            print("  Installing web driver...")
+        chromium_exe = get_chromium_exe()
+        if verbose:
+            print("  Finished installing web driver: ", chromium_exe)
+        opts.binary_location = chromium_exe
+        version = "107.0.5304.36"
         driver_path = ChromeDriverManager(
-            cache_valid_range=CACHE_TIMEOUT_DAYS, version=version, path=WDM_DIR
+            cache_valid_range=CACHE_TIMEOUT_DAYS,
+            version=version,
+            path=WDM_DIR
         ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")

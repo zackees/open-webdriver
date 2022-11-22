@@ -1,4 +1,5 @@
-webdriver-manager==3.5.4
+webdriver-manager==3.8.5
 selenium==3.141.0
 download
 filelock
+py7zr==0.20.2
