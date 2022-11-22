@@ -135,3 +135,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * 1.1.0: Platform binary builds using nuitka are now tested.
   * 1.0.4: Now pins dependencies.
   * 1.0.0: Initial code submit.
+
+# TODO:
+
+  * MacOS: `xattr -d com.apple.quarantine Chromium.app`
