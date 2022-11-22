@@ -1,6 +1,20 @@
 # open-webdriver
 
-## The simplest and easiest way to get a selenium webdriver
+## The simplest and easiest way to get a selenium webdriver working
+
+# API
+
+```bash
+python -m pip install open-webdriver
+```
+
+```python
+from open_webdriver import open_webdriver
+
+with open_webdriver(headless=False) as driver:
+    driver.get("https://www.google.com")
+    assert driver.title == "Google"
+```
 
 #### Platform Unit Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
@@ -16,20 +30,6 @@
 #### Ubuntu Install Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Test_Install/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
 
-
-# Install
-
-`python -m pip install open-webdriver`
-
-# Api
-
-```python
-from open_webdriver import open_webdriver
-
-with open_webdriver(headless=False) as driver:
-    driver.get("https://www.google.com")
-    assert driver.title == "Google"
-```
 
 # Versions
 
