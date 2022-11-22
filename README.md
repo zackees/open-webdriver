@@ -25,7 +25,7 @@
 ```python
 from open_webdriver import open_webdriver
 
-with open_webdriver() as driver:
+with open_webdriver(headless=False) as driver:
     driver.get("https://www.google.com")
     assert driver.title == "Google"
 ```
@@ -107,6 +107,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.3.4: Fixes nuitka builds that broke with panda's update. Nuitka updated from 0.7.7->1.2.2
   * 1.3.3: Adds user_agent.
   * 1.3.2: Adds disable_dev_shm_usage.
   * 1.3.1: Adds disable gpu.
