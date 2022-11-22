@@ -46,7 +46,7 @@ def _unzip(zip_path: str) -> None:
         print("MacOS detected.")
         dir_path = os.path.dirname(zip_path)
         os.makedirs(dir_path, exist_ok=True)
-        cmd = f'py7zr x "{zip_path}" "{dir_path}"'
+        cmd = f'py7zr x "{os.path.abspath(zip_path)}" "{os.path.abspath(dir_path)}"'
         print(f'Executing: "{cmd}"')
         try:
             _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
