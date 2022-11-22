@@ -38,7 +38,7 @@ LOCK = filelock.FileLock(LOCK_FILE)
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
 
-def open_webdriver(  # pylint: disable=too-many-arguments
+def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
