@@ -1,6 +1,6 @@
 # open-webdriver
 
-## The simplest and easiest way to get a selenium webdriver working
+## The simplest and easiest way to get a selenium webdriver running
 
 # API
 
