@@ -72,7 +72,11 @@ def open_webdriver(  # pylint: disable=too-many-arguments
         opts.add_argument(f"--user-agent={user_agent}")
     with LOCK.acquire(timeout=timeout):
         if sys.platform != "darwin":
+            if verbose:
+                print("  Installing web driver...")
             chromium_exe = get_chromium_exe()
+            if verbose:
+                print("  Finished installing web driver: ", chromium_exe)
             opts.binary_location = chromium_exe
         driver_path = ChromeDriverManager(
             cache_valid_range=CACHE_TIMEOUT_DAYS, version="101.0.4951.41", path=WDM_DIR
