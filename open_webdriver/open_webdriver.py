@@ -77,7 +77,7 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         if verbose:
             print("  Finished installing web driver: ", chromium_exe)
         opts.binary_location = chromium_exe
-        version = "107.0.5304.36"
+        version = "101.0.4951.41"
         driver_path = ChromeDriverManager(
             cache_valid_range=CACHE_TIMEOUT_DAYS,
             version=version,
