@@ -93,7 +93,7 @@ def get_chromium_exe() -> str:
     elif sys.platform == "linux":
         exe_path = os.path.join(platform_dir, "chrome")
     elif sys.platform == "darwin":
-        exe_path = os.path.join(platform_dir, "Chromium.app")
+        exe_path = os.path.join(platform_dir, "Chromium.app", "Contents", "MacOS", "Chromium")
     else:
         raise NotImplementedError(f"Unsupported platform: {sys.platform}")
     print(f"Chromium executable: {exe_path}")
