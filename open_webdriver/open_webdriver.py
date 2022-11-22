@@ -78,8 +78,9 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
             if verbose:
                 print("  Finished installing web driver: ", chromium_exe)
             opts.binary_location = chromium_exe
+        version = "latest" if sys.platform == "darwin" else "101.0.4951.41"
         driver_path = ChromeDriverManager(
-            cache_valid_range=CACHE_TIMEOUT_DAYS, version="101.0.4951.41", path=WDM_DIR
+            cache_valid_range=CACHE_TIMEOUT_DAYS, version=version, path=WDM_DIR
         ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
