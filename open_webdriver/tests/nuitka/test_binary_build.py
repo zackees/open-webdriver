@@ -69,9 +69,7 @@ assert os.path.exists(APP_EXE_OUT)
 os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
 
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
-
-print(f"Now testing running of binary {APP_EXE_OUT}")
-
+print("***************************\n" f"Running\n  {APP_EXE_OUT}\n" "***************************")
 rtn_code = os.system(APP_EXE_OUT)
 assert rtn_code == 0, f"Failed to run app, return code was {rtn_code}"
 
