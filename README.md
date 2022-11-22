@@ -4,6 +4,7 @@
 
 #### Platform Unit Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
+[![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_M1_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_m1_macos.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
 
@@ -30,9 +31,9 @@ with open_webdriver(headless=False) as driver:
     assert driver.title == "Google"
 ```
 
-# Important
+# Versions
 
-Windows and Linux use version 101.0.4951.41, while MacOS uses "latest".
+Mac/Windows/Linux all use chromium version 101.0.4951.41
 
 # About
 
@@ -72,10 +73,6 @@ Downsides:
 
   * Only chrome is supported right now.
 
-# Version
-
-Chromium uses version: 101.0.4951.64-1
-
 
 # Tests
 
@@ -111,6 +108,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.3.5: Fixes macOS builds, now uses versioned macOS Chromium.
   * 1.3.4: Fixes nuitka builds that broke with panda's update. Nuitka updated from 0.7.7->1.2.2
   * 1.3.3: Adds user_agent.
   * 1.3.2: Adds disable_dev_shm_usage.
@@ -135,7 +133,3 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * 1.1.0: Platform binary builds using nuitka are now tested.
   * 1.0.4: Now pins dependencies.
   * 1.0.0: Initial code submit.
-
-# TODO:
-
-  * MacOS: `xattr -d com.apple.quarantine Chromium.app`
