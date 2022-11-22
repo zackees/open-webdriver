@@ -52,6 +52,10 @@ def _unzip(zip_path: str) -> None:
             _ = subprocess.check_output(cmd, cwd=os.path.dirname(zip_path), shell=True)
         except subprocess.CalledProcessError:
             print(f"Failed to un7z with command line {cmd}")
+        # Remove quarantine attribute.
+        cmd = f'xattr -d com.apple.quarantine "{os.path.abspath(zip_path)}"'
+        print(f'Executing: "{cmd}"')
+        os.system(cmd)
     else:
         print("Windows detected.")
         with zipfile.ZipFile(zip_path, "r") as zipf:
