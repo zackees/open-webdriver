@@ -30,6 +30,10 @@ with open_webdriver(headless=False) as driver:
     assert driver.title == "Google"
 ```
 
+# Important
+
+Windows and Linux use version 101.0.4951.41, while MacOS uses "latest".
+
 # About
 
 Yet another selenium webdriver wrapper API in python, with the aims of being the easist to use with only two lines of code to get running.
