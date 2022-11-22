@@ -134,3 +134,4 @@ dmypy.json
 
 # Ignore .wdm driver whereever it is
 /.wdm/
+.DS_Store
