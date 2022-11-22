@@ -19,7 +19,6 @@ with open_webdriver(headless=False) as driver:
 
 #### Platform Unit Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_M1_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_m1.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
 
