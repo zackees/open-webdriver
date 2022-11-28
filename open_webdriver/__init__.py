@@ -8,9 +8,6 @@ from .open_webdriver import Driver  # type: ignore
 from .open_webdriver import open_webdriver
 from .path import LOG_FILE
 
-if os.path.exists(LOG_FILE):
-    os.remove(LOG_FILE)
-
 
 def test() -> None:
     """Runs the tests."""

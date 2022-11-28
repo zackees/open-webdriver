@@ -23,8 +23,8 @@
     ],
     "[python]": {
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.organizeImports": true
+            "source.fixAll": false,
+            "source.organizeImports": false
         }
     },
     "python.analysis.extraPaths": [
