@@ -90,12 +90,18 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
     try:
+        if os.path.exists(LOG_FILE):
+            os.remove(LOG_FILE)
         driver = webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
         return driver
     except Exception as err:  # pylint: disable=broad-except
         traceback.print_exc()
+        log_file_text = ""
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE, encoding="utf-8", mode="r") as filed:
+                log_file_text = filed.read()
         print(f"{__file__}: Error: {err}")
-        print(f"Please see:\n  {LOG_FILE}")
+        print(f"{LOG_FILE}:\n{log_file_text}")
         raise
 
 
