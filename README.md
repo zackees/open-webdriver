@@ -38,6 +38,7 @@ if __name__ == "__main__":
 # Versions
 
 Mac/Windows/Linux all use chromium version 101.0.4951.41
+The user agent string will always indicate a Windows client, unless overriden.
 
 # About
 
@@ -112,6 +113,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.4.0: Adds default user agent string, fixes running headless mode which changes the user agent string.
   * 1.3.6: Remove mac m1 runner, which doesn't exist on github
   * 1.3.5: Fixes macOS builds, now uses versioned macOS Chromium.
   * 1.3.4: Fixes nuitka builds that broke with panda's update. Nuitka updated from 0.7.7->1.2.2

@@ -36,6 +36,13 @@ LOCK_FILE = os.path.join(WDM_DIR, "lock.file")
 
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
+CHROME_VERSION = "101.0.4951.41"
+DEFAULT_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    " AppleWebKit/537.36 (KHTML, like Gecko)"
+    f" Chrome/{CHROME_VERSION} Safari/537.36"
+)
+
 
 def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     headless: bool = True,
@@ -43,7 +50,7 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     timeout: float = INSTALL_TIMEOUT,
     disable_gpu: bool | None = None,
     disable_dev_shm_usage: bool = True,
-    user_agent: str | None = None,
+    user_agent: str | None = DEFAULT_USER_AGENT,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
@@ -77,20 +84,13 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         if verbose:
             print("  Finished installing web driver: ", chromium_exe)
         opts.binary_location = chromium_exe
-        version = "101.0.4951.41"
         driver_path = ChromeDriverManager(
-            cache_valid_range=CACHE_TIMEOUT_DAYS,
-            version=version,
-            path=WDM_DIR
+            cache_valid_range=CACHE_TIMEOUT_DAYS, version=CHROME_VERSION, path=WDM_DIR
         ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
     try:
-        driver = webdriver.Chrome(
-            driver_path,
-            options=opts,
-            service_log_path=LOG_FILE
-        )
+        driver = webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
         return driver
     except Exception as err:  # pylint: disable=broad-except
         traceback.print_exc()
