@@ -1,6 +1,6 @@
 # open-webdriver
 
-## The simplest and easiest way to get a selenium webdriver running
+## The simplest and easiest way to get a scriptable chrome browser running using selenium webdriver running
 
 # API
 
