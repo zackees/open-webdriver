@@ -4,8 +4,8 @@
 
 import os
 
-from .open_webdriver import Driver  # type: ignore
-from .open_webdriver import open_webdriver
+from .main import Driver  # type: ignore
+from .main import open_webdriver
 from .path import LOG_FILE
 
 

@@ -5,7 +5,7 @@
 import argparse
 import unittest
 
-from open_webdriver.open_webdriver import open_webdriver
+from open_webdriver.main import open_webdriver
 
 
 def do_google_test(headless: bool) -> bool:

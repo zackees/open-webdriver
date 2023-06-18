@@ -3,3 +3,4 @@ selenium==3.141.0
 download
 filelock
 py7zr==0.20.2
+urllib3==1.26.10

@@ -92,7 +92,9 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     try:
         if os.path.exists(LOG_FILE):
             os.remove(LOG_FILE)
-        driver = webdriver.Chrome(driver_path, options=opts, service_log_path=LOG_FILE)
+        driver = webdriver.Chrome(
+            executable_path=driver_path, options=opts, service_log_path=LOG_FILE
+        )
         return driver
     except Exception as err:  # pylint: disable=broad-except
         traceback.print_exc()
