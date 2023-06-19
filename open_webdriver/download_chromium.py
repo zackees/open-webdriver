@@ -9,11 +9,12 @@ import os
 import subprocess
 import sys
 import zipfile
+import lzma  # type: ignore # must be included for nuitka build
 
 from download import download  # type: ignore
 import six  # type: ignore # must be included for nuitka build
 import certifi  # type: ignore # must be included for nuitka build
-import lzma  # type: ignore # must be included for nuitka build
+
 
 from open_webdriver.path import WDM_CHROMIUM_DIR
 
