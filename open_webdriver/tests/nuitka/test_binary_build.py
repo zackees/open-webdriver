@@ -9,6 +9,7 @@
 import os
 import sys
 import zipfile
+import subprocess
 from pprint import pprint
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -72,7 +73,11 @@ os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
 
 print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
 print("***************************\n" f"Running\n  {APP_EXE_OUT}\n" "***************************")
-rtn_code = os.system(APP_EXE_OUT)
-assert rtn_code == 0, f"Failed to run app, return code was {rtn_code}"
+
+try:
+    subprocess.run(APP_EXE_OUT, check=True)
+except subprocess.CalledProcessError as err:
+    print(f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}")
+    sys.exit(err.returncode)
 
 print(f"Output of running binary {APP_EXE_OUT} was successful")
