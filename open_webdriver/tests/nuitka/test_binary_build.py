@@ -18,10 +18,11 @@ DEFAULT_APP_BUILD_DIR = os.path.join(
     PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
 )
 APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)  # gh_actions
+APP_PACKAGE = "open_webdriver.demo_app"
 APP_NAME = "open_webdriver.demo_app"
 if sys.platform == "win32":
     APP_NAME += ".exe"
-APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}"
+APP_EXE_OUT = os.path.join(APP_BUILD_DIR, APP_NAME)
 
 print("os.environ:")
 pprint(dict(os.environ))
@@ -44,7 +45,7 @@ CMD = [
     APP_SRC,
     "--onefile",
     "-o",
-    APP_NAME
+    APP_NAME,
 ]
 CMD_STR = " ".join(CMD)
 
@@ -63,7 +64,7 @@ os.chdir(APP_BUILD_DIR)
 with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
     zipf.write(APP_NAME)
 
-expected_zip_file = f"{APP_BUILD_DIR}/{APP_NAME}.zip"
+expected_zip_file = os.path.join(APP_BUILD_DIR, f"{APP_NAME}.zip")
 assert os.path.exists(expected_zip_file)
 assert os.path.exists(APP_EXE_OUT)
 
