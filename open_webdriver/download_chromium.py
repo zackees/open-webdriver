@@ -27,6 +27,13 @@ def _set_exe_permissions(start_dir: str) -> None:
             os.chmod(path, 0o755)
 
 
+def _download(url: str, path: str) -> str:
+    """Downloads a file from a url to a path."""
+
+    path = download(url=url, path=path, kind="file", progressbar=True, replace=True, timeout=5 * 60)
+    return path
+
+
 def _unzip(zip_path: str) -> None:
     """Unzips a zip file."""
 
@@ -34,7 +41,7 @@ def _unzip(zip_path: str) -> None:
         print("Linux detected.")
         url = "https://github.com/zackees/open-webdriver/raw/main/chromium/7za"
         dst = os.path.join(WDM_CHROMIUM_DIR, "7za")
-        path_7za = download(url=url, path=dst, kind="file", progressbar=True, replace=True)
+        path_7za = _download(url=url, path=dst)
         path_7za = os.path.abspath(path_7za)
         assert os.path.exists(path_7za), f"{path_7za} does not exist."
         # Add executable permissions.
@@ -79,7 +86,7 @@ def get_chromium_exe() -> str:
         ext = ".7z" if sys.platform == "darwin" else ".zip"
         archive_dst = platform_dir + ext
         print(f"Download {url_src} to {archive_dst}")
-        download(url=url_src, path=archive_dst, kind="file", progressbar=True, replace=False)
+        _download(url=url_src, path=archive_dst)
         assert os.path.exists(archive_dst), f"{archive_dst} does not exist."
         print(f"Unzipping {archive_dst}")
         _unzip(zip_path=archive_dst)
