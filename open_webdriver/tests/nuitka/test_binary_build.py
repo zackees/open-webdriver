@@ -55,7 +55,7 @@ rtn = os.system(CMD_STR)
 if rtn != 0:
     print("Failed to build")
     sys.exit(rtn)
-print(f"Successfully built {APP_BUILD_DIR}")
+print(f"Successfully built {os.path.join(APP_BUILD_DIR, APP_NAME)}")
 
 assert os.path.exists(APP_BUILD_DIR), f"No directory: {APP_BUILD_DIR}"
 os.chdir(APP_BUILD_DIR)
@@ -65,8 +65,8 @@ with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
     zipf.write(APP_NAME)
 
 expected_zip_file = os.path.join(APP_BUILD_DIR, f"{APP_NAME}.zip")
-assert os.path.exists(expected_zip_file)
-assert os.path.exists(APP_EXE_OUT)
+assert os.path.isfile(expected_zip_file)
+assert os.path.isfile(APP_EXE_OUT)
 
 os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
 
