@@ -115,6 +115,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.4.3: Updated nuitka package and fixed breaking build from urllib3 update.
   * 1.4.2: Prints log if chrome driver fails to launch.
   * 1.4.1: Try and fix failed upload on last version.
   * 1.4.0: Adds default user agent string, fixes running headless mode which uses a different user agent string.
