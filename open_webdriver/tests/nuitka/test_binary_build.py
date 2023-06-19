@@ -18,7 +18,7 @@ DEFAULT_APP_BUILD_DIR = os.path.join(
     PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
 )
 APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)  # gh_actions
-APP_NAME = os.path.basename(APP_SRC).replace(".py", "")
+APP_NAME = "open_webdriver.demo_app"
 if sys.platform == "win32":
     APP_NAME += ".exe"
 APP_EXE_OUT = f"{APP_BUILD_DIR}/{APP_NAME}"
@@ -44,7 +44,7 @@ CMD = [
     APP_SRC,
     "--onefile",
     "-o",
-    "open_webdriver.demo_app",
+    APP_NAME
 ]
 CMD_STR = " ".join(CMD)
 
@@ -56,6 +56,7 @@ if rtn != 0:
     sys.exit(rtn)
 print(f"Successfully built {APP_BUILD_DIR}")
 
+assert os.path.exists(APP_BUILD_DIR), f"No directory: {APP_BUILD_DIR}"
 os.chdir(APP_BUILD_DIR)
 
 # make a zip file of the APP_NAME at the current directory
