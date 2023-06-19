@@ -44,7 +44,7 @@ CMD = [
     APP_SRC,
     "--onefile",
     "-o",
-    APP_EXE_OUT,
+    "open_webdriver.demo_app",
 ]
 CMD_STR = " ".join(CMD)
 

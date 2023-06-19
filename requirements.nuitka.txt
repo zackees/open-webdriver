@@ -1,3 +1,4 @@
-nuitka==0.7.7
+nuitka==1.5.1
 zstandard==0.17.0
 chardet
+ordered-set
