@@ -1,6 +1,6 @@
 # open-webdriver
 
-## The simplest and easiest way to get a scriptable chrome browser running using selenium webdriver running.
+## The simplest and easiest way to get a scriptable chrome browser running using selenium webdriver.
 
 Note that this package uses a pinned dependency for urllib3 and should be installed in an isolated environment.
 
