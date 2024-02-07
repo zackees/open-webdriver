@@ -13,7 +13,7 @@ python -m pip install open-webdriver
 ```python
 import os
 from open_webdriver import open_webdriver
-# Needed or else exceptions will be thrown on when executed from github actions.
+# Needed or else exceptions will be thrown when executed from github actions.
 IS_HEADLESS = os.environ.get("GITHUB_ACTIONS") == "true"
 
 def main():
