@@ -19,65 +19,69 @@ DEFAULT_APP_BUILD_DIR = os.path.join(
     PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
 )
 APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)  # gh_actions
-APP_PACKAGE = "open_webdriver.demo_app"
-APP_NAME = "open_webdriver.demo_app"
-if sys.platform == "win32":
-    APP_NAME += ".exe"
-APP_EXE_OUT = os.path.join(APP_BUILD_DIR, APP_NAME)
 
-print("os.environ:")
-pprint(dict(os.environ))
+def main() -> int:
+    app_name = "open_webdriver.demo_app"
+    if sys.platform == "win32":
+        app_name += ".exe"
+    app_exe_out = os.path.join(APP_BUILD_DIR, app_name)
 
-print(f"Changing directory to {PROJECT_ROOT}")
-os.chdir(PROJECT_ROOT)
+    print("os.environ:")
+    pprint(dict(os.environ))
 
-CMD = [
-    "pip install -r requirements.nuitka.txt",
-    "&&",
-    "pip install -e .",
-    "&&",
-    "python -m nuitka",
-    "--assume-yes-for-downloads",
-    "--follow-imports",
-    "--standalone",
-    "--python-flag=-OO",  # Strips comments
-    "--include-package-data=selenium",  # For html/js/css resources
-    f"--output-dir={APP_BUILD_DIR}",
-    APP_SRC,
-    "--onefile",
-    "-o",
-    APP_NAME,
-]
-CMD_STR = " ".join(CMD)
+    print(f"Changing directory to {PROJECT_ROOT}")
+    os.chdir(PROJECT_ROOT)
 
-print(f"Executing:\n  {CMD_STR}")
-rtn = os.system(CMD_STR)
+    cmd_list = [
+        "pip install -r requirements.nuitka.txt",
+        "&&",
+        "pip install -e .",
+        "&&",
+        "python -m nuitka",
+        "--assume-yes-for-downloads",
+        "--follow-imports",
+        "--standalone",
+        "--python-flag=-OO",  # Strips comments
+        "--include-package-data=selenium",  # For html/js/css resources
+        f"--output-dir={APP_BUILD_DIR}",
+        APP_SRC,
+        "--onefile",
+        "-o",
+        app_name,
+    ]
+    cmd_str = " ".join(cmd_list)
 
-if rtn != 0:
-    print("Failed to build")
-    sys.exit(rtn)
-print(f"Successfully built {os.path.join(APP_BUILD_DIR, APP_NAME)}")
+    print(f"Executing:\n  {cmd_str}")
+    rtn = os.system(cmd_str)
 
-assert os.path.exists(APP_BUILD_DIR), f"No directory: {APP_BUILD_DIR}"
-os.chdir(APP_BUILD_DIR)
+    if rtn != 0:
+        print("Failed to build")
+        sys.exit(rtn)
+    print(f"Successfully built {os.path.join(APP_BUILD_DIR, app_name)}")
 
-# make a zip file of the APP_NAME at the current directory
-with zipfile.ZipFile(f"{APP_NAME}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
-    zipf.write(APP_NAME)
+    assert os.path.exists(APP_BUILD_DIR), f"No directory: {APP_BUILD_DIR}"
+    os.chdir(APP_BUILD_DIR)
 
-expected_zip_file = os.path.join(APP_BUILD_DIR, f"{APP_NAME}.zip")
-assert os.path.isfile(expected_zip_file)
-assert os.path.isfile(APP_EXE_OUT)
+    # make a zip file of the app_name at the current directory
+    with zipfile.ZipFile(f"{app_name}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
+        zipf.write(app_name)
 
-os.chmod(APP_EXE_OUT, 0o755)  # Execution permissions.
+    expected_zip_file = os.path.join(APP_BUILD_DIR, f"{app_name}.zip")
+    assert os.path.isfile(expected_zip_file)
+    assert os.path.isfile(app_exe_out)
 
-print(f'\nDone building app "{APP_NAME}", binary located at:\n  {os.path.abspath(APP_NAME)}\n')
-print("***************************\n" f"Running\n  {APP_EXE_OUT}\n" "***************************")
+    os.chmod(app_exe_out, 0o755)  # Execution permissions.
 
-try:
-    subprocess.run(APP_EXE_OUT, check=True)
-except subprocess.CalledProcessError as err:
-    print(f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}")
-    sys.exit(err.returncode)
+    print(f'\nDone building app "{app_name}", binary located at:\n  {os.path.abspath(app_name)}\n')
+    print("***************************\n" f"Running\n  {app_exe_out}\n" "***************************")
 
-print(f"Output of running binary {APP_EXE_OUT} was successful")
+    try:
+        subprocess.run(app_exe_out, check=True)
+    except subprocess.CalledProcessError as err:
+        print(f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}")
+        sys.exit(err.returncode)
+
+    print(f"Output of running binary {app_exe_out} was successful")
+
+if __name__ == "__main__":
+    sys.exit(main())
