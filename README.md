@@ -28,16 +28,16 @@ if __name__ == "__main__":
 
 #### Platform Unit Tests
 [![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
+[![Win_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
+[![Ubuntu_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
 
 #### Platform binary nuitka build
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Nuitka/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml)
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Win_Nuitka/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Nuitka/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
+[![MacOS_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
+[![Win_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
+[![Ubuntu_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
 
 #### Ubuntu Install Tests
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/Ubuntu_Test_Install/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
+[![Ubuntu_Test_Install](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
 
 
 # Versions
