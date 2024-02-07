@@ -8,7 +8,7 @@ import os
 import ssl
 import sys
 import traceback
-from typing import Any
+from typing import Any, Optional
 
 import filelock  # type: ignore
 import urllib3  # type: ignore
@@ -48,9 +48,9 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
     timeout: float = INSTALL_TIMEOUT,
-    disable_gpu: Union[bool, None] = None,
+    disable_gpu: Optional[bool] = None,
     disable_dev_shm_usage: bool = True,
-    user_agent: Union[str, None] = DEFAULT_USER_AGENT,
+    user_agent: Optional[str] = DEFAULT_USER_AGENT,
 ) -> Driver:
     """Opens the web driver."""
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
