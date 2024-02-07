@@ -3,3 +3,4 @@ zstandard==0.17.0
 chardet
 ordered-set
 python-dotenv==1.0.0
+tqdm==4.66.1
