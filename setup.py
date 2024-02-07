@@ -58,6 +58,9 @@ class UploadCommand(Command):
         except OSError:
             pass
 
+        os.system("pip install --upgrade twine")
+        os.system("pip install --upgrade wheel")
+
         self.status("Building Source and Wheel (universal) distribution…")
         os.system('"{0}" setup.py sdist bdist_wheel --universal'.format(sys.executable))
 
