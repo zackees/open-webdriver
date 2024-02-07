@@ -1,6 +1,6 @@
 nuitka==1.6.3
 zstandard==0.17.0
-chardet
-ordered-set
+chardet==5.2.0
+ordered-set==4.1.0
 python-dotenv==1.0.0
 tqdm==4.66.1
