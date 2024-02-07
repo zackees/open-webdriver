@@ -32,7 +32,7 @@ if __name__ == "__main__":
 [![Ubuntu_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
 
 #### Platform binary nuitka build
-[![MacOS_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
+[![MacOS_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml)
 [![Win_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
 [![Ubuntu_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
 
