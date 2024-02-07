@@ -7,9 +7,9 @@
 # pylint: disable=R1716
 
 import os
+import subprocess
 import sys
 import zipfile
-import subprocess
 from pprint import pprint
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +20,9 @@ DEFAULT_APP_BUILD_DIR = os.path.join(
 )
 APP_BUILD_DIR = os.environ.get("RUNNER_TEMP", DEFAULT_APP_BUILD_DIR)  # gh_actions
 
+
 def main() -> int:
+    """Builds the demo app."""
     app_name = "open_webdriver.demo_app"
     if sys.platform == "win32":
         app_name += ".exe"
@@ -72,16 +74,26 @@ def main() -> int:
 
     os.chmod(app_exe_out, 0o755)  # Execution permissions.
 
-    print(f'\nDone building app "{app_name}", binary located at:\n  {os.path.abspath(app_name)}\n')
-    print("***************************\n" f"Running\n  {app_exe_out}\n" "***************************")
+    print(
+        f'\nDone building app "{app_name}", binary located at:\n  {os.path.abspath(app_name)}\n'
+    )
+    print(
+        "***************************\n"
+        f"Running\n  {app_exe_out}\n"
+        "***************************"
+    )
 
     try:
         subprocess.run(app_exe_out, check=True)
     except subprocess.CalledProcessError as err:
-        print(f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}")
+        print(
+            f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}"
+        )
         sys.exit(err.returncode)
 
     print(f"Output of running binary {app_exe_out} was successful")
+    return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

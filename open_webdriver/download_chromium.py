@@ -5,16 +5,15 @@ Module to download the Chromium browser from the repo.
 # flake8: noqa F401
 # pylint: disable=unused-import
 
+import lzma  # type: ignore # must be included for nuitka build
 import os
 import subprocess
 import sys
 import zipfile
-import lzma  # type: ignore # must be included for nuitka build
 
-from download import download  # type: ignore
-import six  # type: ignore # must be included for nuitka build
 import certifi  # type: ignore # must be included for nuitka build
-
+import six  # type: ignore # must be included for nuitka build
+from download import download  # type: ignore
 
 from open_webdriver.path import WDM_CHROMIUM_DIR
 
@@ -32,7 +31,9 @@ def _set_exe_permissions(start_dir: str) -> None:
 def _download(url: str, path: str) -> str:
     """Downloads a file from a url to a path."""
 
-    path = download(url=url, path=path, kind="file", progressbar=True, replace=True, timeout=5 * 60)
+    path = download(
+        url=url, path=path, kind="file", progressbar=True, replace=True, timeout=5 * 60
+    )
     return path
 
 
@@ -107,11 +108,15 @@ def get_chromium_exe() -> str:
     elif sys.platform == "linux":
         exe_path = os.path.join(platform_dir, "chrome")
     elif sys.platform == "darwin":
-        exe_path = os.path.join(platform_dir, "Chromium.app", "Contents", "MacOS", "Chromium")
+        exe_path = os.path.join(
+            platform_dir, "Chromium.app", "Contents", "MacOS", "Chromium"
+        )
     else:
         raise NotImplementedError(f"Unsupported platform: {sys.platform}")
     print(f"Chromium executable: {exe_path}")
-    assert os.path.exists(exe_path), f"Chromium executable not found: {os.path.abspath(exe_path)}"
+    assert os.path.exists(
+        exe_path
+    ), f"Chromium executable not found: {os.path.abspath(exe_path)}"
     return exe_path
 
 

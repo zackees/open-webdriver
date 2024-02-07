@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+# cd to self bash script directory
+cd $( dirname ${BASH_SOURCE[0]})
+echo Running isort
+isort --profile black open_webdriver
+echo Running black
+black open_webdriver
+echo Running flake8 open_webdriver
+flake8 open_webdriver
+echo Running pylint open_webdriver
+pylint open_webdriver
+echo Running mypy open_webdriver
+mypy open_webdriver
+echo Linting complete!

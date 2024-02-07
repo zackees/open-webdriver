@@ -2,7 +2,6 @@
     Tests the open_webdriver package.
 """
 
-
 import threading
 import unittest
 
