@@ -11,10 +11,13 @@ python -m pip install open-webdriver
 ```
 
 ```python
+import os
 from open_webdriver import open_webdriver
+# Needed or else exceptions will be thrown on when executed from github actions.
+IS_HEADLESS = os.environ.get("GITHUB_ACTIONS") == "true"
 
 def main():
-    with open_webdriver(headless=False) as driver:
+    with open_webdriver(headless=IS_HEADLESS) as driver:
         # All Chromium / web driver dependencies are now installed.
         driver.get("https://www.google.com")
         assert driver.title == "Google"
