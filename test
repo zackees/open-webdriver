@@ -1,0 +1,6 @@
+#!/bin/bash
+#if activate.sh exists, invoke it
+if [ -f activate.sh ]; then
+    source activate.sh
+fi
+python -m unittest discover open_webdriver/tests/unit
