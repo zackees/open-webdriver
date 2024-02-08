@@ -118,6 +118,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.4.5: `Driver` returned from `open_webdriver` is now of WebDriver type instead of one of the base classes. Should help linting.
   * 1.4.4: Fixed nuitka build process with breaking dependencies introduced by python-dotenv 1.0.1
   * 1.4.3: Updated nuitka package and fixed breaking build from urllib3 update.
   * 1.4.2: Prints log if chrome driver fails to launch.
