@@ -16,6 +16,7 @@ from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
+from webdriver_manager.core.driver_cache import DriverCacheManager
 
 from open_webdriver.download_chromium import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR
@@ -83,9 +84,12 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         chromium_exe = get_chromium_exe()
         if verbose:
             print("  Finished installing web driver: ", chromium_exe)
+        cache_manager = DriverCacheManager(
+            root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
+        )
         opts.binary_location = chromium_exe
         driver_path = ChromeDriverManager(
-            cache_valid_range=CACHE_TIMEOUT_DAYS, version=CHROME_VERSION, path=WDM_DIR
+            cache_manager=cache_manager, driver_version=CHROME_VERSION
         ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")

@@ -1,4 +1,4 @@
-webdriver-manager==3.8.5
+webdriver-manager==4.0.1
 selenium==3.141.0
 download
 filelock
