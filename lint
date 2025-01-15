@@ -9,7 +9,7 @@ black open_webdriver
 echo Running flake8 open_webdriver
 flake8 open_webdriver
 echo Running pylint open_webdriver
-pylint open_webdriver
+ruff check --fix open_webdriver
 echo Running mypy open_webdriver
 mypy open_webdriver
 echo Linting complete!

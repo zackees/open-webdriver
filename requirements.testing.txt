@@ -4,3 +4,4 @@ pylint
 pytest
 black
 tox
+ruff

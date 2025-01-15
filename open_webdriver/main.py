@@ -16,7 +16,7 @@ from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
-from webdriver_manager.core.driver_cache import DriverCacheManager
+from webdriver_manager.core.driver_cache import DriverCacheManager  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR

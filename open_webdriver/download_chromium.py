@@ -5,14 +5,11 @@ Module to download the Chromium browser from the repo.
 # flake8: noqa F401
 # pylint: disable=unused-import
 
-import lzma  # type: ignore # must be included for nuitka build
 import os
 import subprocess
 import sys
 import zipfile
 
-import certifi  # type: ignore # must be included for nuitka build
-import six  # type: ignore # must be included for nuitka build
 from download import download  # type: ignore
 
 from open_webdriver.path import WDM_CHROMIUM_DIR
