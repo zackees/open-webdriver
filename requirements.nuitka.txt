@@ -1,6 +1,6 @@
-nuitka==2.0.1
+nuitka==2.6.8
 zstandard==0.17.0
 chardet==5.2.0
 ordered-set==4.1.0
-python-dotenv==1.0.0
-tqdm==4.66.1
+python-dotenv==1.0.1
+tqdm==4.67.1
