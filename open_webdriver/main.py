@@ -37,7 +37,7 @@ LOCK_FILE = os.path.join(WDM_DIR, "lock.file")
 
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
-CHROME_VERSION = "114.0.5735.90"
+CHROME_VERSION = "101.0.4951.64"
 DEFAULT_USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     " AppleWebKit/537.36 (KHTML, like Gecko)"
