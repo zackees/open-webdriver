@@ -18,4 +18,4 @@ jobs:
         ./install
     - name: Run tests
       run: |
-        uv run open_webdriver_test.py
+        uv run open_webdriver_test
