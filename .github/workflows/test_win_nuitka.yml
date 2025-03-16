@@ -19,4 +19,4 @@ jobs:
         uv pip install -r requirements.nuitka.txt
     - name: Run Binary Build
       run: |
-        uv run open_webdriver/tests/nuitka/test_binary_build.py
+        uv run src/open_webdriver/tests/nuitka/test_binary_build.py
