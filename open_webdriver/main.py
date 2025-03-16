@@ -14,6 +14,7 @@ import filelock  # type: ignore
 import urllib3  # type: ignore
 from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
+from selenium.webdriver.chromium.options import ChromiumOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.core.driver_cache import DriverCacheManager  # type: ignore
@@ -60,13 +61,12 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         if sys.platform == "linux":
             if os.geteuid() == 0:
                 filed.write("\n\n  WARNING: Running as root. The driver may crash!\n\n")
-    opts: Any = None
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
         headless = True
     # For Chrome/Brave just install the driver immediately.
-    opts = ChromeOptions()
+    opts: ChromeOptions = ChromeOptions()
     opts.add_argument("--ignore-certificate-errors")
     opts.add_argument("--no-sandbox")
     if disable_dev_shm_usage:
