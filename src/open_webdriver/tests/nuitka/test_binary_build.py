@@ -35,9 +35,9 @@ def main() -> int:
     os.chdir(PROJECT_ROOT)
 
     cmd_list = [
-        "pip install -r requirements.nuitka.txt",
+        "uv pip install -r requirements.nuitka.txt",
         "&&",
-        "pip install -e .",
+        "uv pip install -e .",
         "&&",
         "python -m nuitka",
         "--assume-yes-for-downloads",
