@@ -104,6 +104,8 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         if os.path.exists(LOG_FILE):
             os.remove(LOG_FILE)
         driver = webdriver.Chrome(options=opts)  # , service_log_path=LOG_FILE)
+        if headless:
+            driver.set_window_size(1440, 900)
         return driver
     except Exception as err:  # pylint: disable=broad-except
         traceback.print_exc()

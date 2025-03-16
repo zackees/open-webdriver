@@ -19,7 +19,7 @@ IS_HEADLESS = os.environ.get("GITHUB_ACTIONS") == "true"
 
 def main():
     with open_webdriver(headless=IS_HEADLESS) as driver:
-        driver.set_window_size(1440, 900) # Needed for headless mode.
+        driver.set_window_size(1440, 900)
         # All Chromium / web driver dependencies are now installed.
         driver.get("https://www.google.com")
         assert driver.title == "Google"
