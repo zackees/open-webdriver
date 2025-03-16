@@ -84,10 +84,10 @@ def main() -> int:
     )
 
     try:
-        subprocess.run(app_exe_out, check=True)
+        subprocess.run(app_exe_out, capture_output=True, check=True)
     except subprocess.CalledProcessError as err:
         print(
-            f"Failed to run app, return code was {err.returncode}, output was:\n{err.output}"
+            f"Failed to run app, return code was {err.returncode}\n  output was:\n{err.output}\n  stderr was:\n{err.stderr}"
         )
         sys.exit(err.returncode)
 
