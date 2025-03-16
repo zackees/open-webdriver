@@ -39,7 +39,7 @@ def main() -> int:
         "&&",
         "uv pip install -e .",
         "&&",
-        "python -m nuitka",
+        "uv run -m nuitka",
         "--assume-yes-for-downloads",
         "--follow-imports",
         "--standalone",
