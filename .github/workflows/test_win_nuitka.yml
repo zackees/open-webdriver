@@ -11,21 +11,12 @@ jobs:
         os: [windows-latest]
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - uses: actions/cache@v2
-      name: Configure pip caching
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
     - name: Install dependencies
       run: |
-        pip install --no-cache-dir -e . && pip install -r requirements.nuitka.txt
+        ./install
+        uv pip install -r requirements.nuitka.txt
     - name: Run Binary Build
       run: |
-        python open_webdriver/tests/nuitka/test_binary_build.py
-
+        uv run open_webdriver/tests/nuitka/test_binary_build.py
