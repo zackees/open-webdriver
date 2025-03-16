@@ -37,12 +37,18 @@ LOCK_FILE = os.path.join(WDM_DIR, "lock.file")
 
 INSTALL_TIMEOUT = float(60 * 10)  # Upto 10 minutes of install time.
 
-CHROME_VERSION = "101.0.4951.64"
-DEFAULT_USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    " AppleWebKit/537.36 (KHTML, like Gecko)"
-    f" Chrome/{CHROME_VERSION} Safari/537.36"
-)
+# CHROME_VERSION = "136.0.7071.0"
+CHROME_VERSION = None
+
+
+def _user_agent(chrome_version: str | None = None) -> str:
+    """Gets the user agent."""
+    chrome_version = chrome_version or "136.0.7071.0"
+    return (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        " AppleWebKit/537.36 (KHTML, like Gecko)"
+        f" Chrome/{chrome_version} Safari/537.36"
+    )
 
 
 def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
@@ -51,9 +57,10 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     timeout: float = INSTALL_TIMEOUT,
     disable_gpu: Optional[bool] = None,
     disable_dev_shm_usage: bool = True,
-    user_agent: Optional[str] = DEFAULT_USER_AGENT,
+    user_agent: str | None = None,
 ) -> Driver:
     """Opens the web driver."""
+    user_agent = user_agent or _user_agent()
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     with open(LOG_FILE, encoding="utf-8", mode="w") as filed:
         filed.write(f"{__file__}: Starting up web driver.\n")
@@ -80,13 +87,14 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     with lock.acquire(timeout=timeout):
         if verbose:
             print("  Installing web driver...")
-        chromium_exe = get_chromium_exe()
-        if verbose:
-            print("  Finished installing web driver: ", chromium_exe)
+        if CHROME_VERSION is not None:
+            chromium_exe = get_chromium_exe()
+            if verbose:
+                print("  Finished installing web driver: ", chromium_exe)
         cache_manager = DriverCacheManager(
             root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
         )
-        opts.binary_location = chromium_exe
+        # opts.binary_location = chromium_exe
         driver_path = ChromeDriverManager(
             cache_manager=cache_manager, driver_version=CHROME_VERSION
         ).install()
