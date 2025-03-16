@@ -1,5 +1,5 @@
 """
-    Handles the creation of the web driver.
+Handles the creation of the web driver.
 """
 
 # pylint: disable=protected-access

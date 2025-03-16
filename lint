@@ -1,17 +1,15 @@
 #!/bin/bash
 set -e
 
-echo Running ruff src
-uv run ruff check --fix src
-echo Running ruff tests
-uv run ruff check --fix tests
-echo Running black src tests
-uv run black src tests
-echo Running isort src tests
-uv run isort --profile black src tests
-echo Running mypy src
-uv run mypy src tests
-echo Running pyright src tests
-uv run pyright src tests --threads
+echo Running ruff open_webdriver
+uv run ruff check --fix open_webdriver
+echo Running black open_webdriver
+uv run black open_webdriver
+echo Running isort open_webdriver
+uv run isort --profile black open_webdriver
+echo Running mypy open_webdriver
+uv run mypy open_webdriver
+echo Running pyright open_webdriver
+uv run pyright open_webdriver --threads
 echo Linting complete!
 exit 0

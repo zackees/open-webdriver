@@ -1,5 +1,5 @@
 """
-    Module for the Open Webdriver.
+Module for the Open Webdriver.
 """
 
 from .main import Driver  # type: ignore

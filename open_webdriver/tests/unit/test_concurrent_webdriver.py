@@ -1,5 +1,5 @@
 """
-    Tests the open_webdriver package.
+Tests the open_webdriver package.
 """
 
 import threading

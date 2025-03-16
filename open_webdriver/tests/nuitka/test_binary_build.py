@@ -1,7 +1,7 @@
 """
-    Demo app build in nuitka. This builds a single file binary which is self signed and
-    can be distributed. To build for a platform, you must have that platform. So Windows
-    can build for win32 platform, MacOS for darwin and Linux for Linux.
+Demo app build in nuitka. This builds a single file binary which is self signed and
+can be distributed. To build for a platform, you must have that platform. So Windows
+can build for win32 platform, MacOS for darwin and Linux for Linux.
 """
 
 # pylint: disable=R1716
