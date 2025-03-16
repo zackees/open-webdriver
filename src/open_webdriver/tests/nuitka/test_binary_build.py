@@ -14,7 +14,7 @@ from pprint import pprint
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(HERE))))
-APP_SRC = os.path.join(PROJECT_ROOT, "open_webdriver", "demo_app.py")
+APP_SRC = os.path.join(PROJECT_ROOT, "src", "open_webdriver", "demo_app.py")
 DEFAULT_APP_BUILD_DIR = os.path.join(
     PROJECT_ROOT, "tests", "nuitka", "test_data", "build", "demo_app"
 )
