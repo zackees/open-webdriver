@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=65.5.1", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open_webdriver"
+readme = "README.md"
+description = "Easiest zero-config selenium webdriver for Python"
+requires-python = ">=3.10"
+keywords = ["web driver easy setup"]
+license = { text = "BSD 3-Clause License" }
+classifiers = ["Programming Language :: Python :: 3"]
+
+dependencies = [
+    "webdriver-manager==4.0.2",
+    "selenium==4.29.0",
+    "download",
+    "filelock",
+    "py7zr==0.20.2",
+    "certifi",
+    "six",
+
+]
+
+# Change this with the version number bump.
+version = "1.6.0"
+
+[tool.setuptools]
+package-dir = {"" = "open_webdriver"}
+
+[tool.ruff]
+line-length = 200
+
+[tool.pylint."MESSAGES CONTROL"]
+good-names = [
+    "c",
+    "i",
+    "ok",
+    "id",
+    "e",
+    "f"
+]
+disable = [
+    "missing-function-docstring",
+    "missing-module-docstring"
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+ignore_missing_imports = true
+disable_error_code = ["import-untyped"]
+
+
+[project.scripts]
+open_webdriver_test = "open_webdriver:test"
+

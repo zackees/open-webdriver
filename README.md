@@ -120,6 +120,7 @@ Pull requests are welcome for this code base. When you submit your pull request 
   * Must pass the linting requirements. Run `tox` (also run on your pull request).
 
 # Changes
+  * 1.6.0: Code refresh, switched to uv, upgraded pinned chrome version.
   * 1.5.0: Upgraded dependencies. No longer depends on ancient version of urllib.
   * 1.4.5: `Driver` returned from `open_webdriver` is now of WebDriver type instead of one of the base classes. Should help linting.
   * 1.4.4: Fixed nuitka build process with breaking dependencies introduced by python-dotenv 1.0.1

@@ -136,3 +136,4 @@ dmypy.json
 /.wdm/
 .DS_Store
 activate
+uv.lock
