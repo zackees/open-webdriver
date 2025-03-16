@@ -8,13 +8,12 @@ import os
 import ssl
 import sys
 import traceback
-from typing import Any, Optional
+from typing import Optional
 
 import filelock  # type: ignore
 import urllib3  # type: ignore
 from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
-from selenium.webdriver.chromium.options import ChromiumOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.core.driver_cache import DriverCacheManager  # type: ignore

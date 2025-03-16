@@ -2,10 +2,6 @@
     "python.autoComplete.extraPaths": [
         "."
     ],
-    "python.venvFolders": [
-        "${workspaceFolder}/venv",
-    ],
-    "python.defaultInterpreterPath": "venv/bin/python",
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.profiles.windows": {
         "Git Bash": {
@@ -13,31 +9,17 @@
             "args": [
                 "--cd=."
             ]
-        },
-        "cmd.exe": {
-            "path": "C:\\Windows\\System32\\cmd.exe",
         }
     },
-    "python.linting.pylintEnabled": true,
+    // adds activate virtualenv to terminal
+    "terminal.integrated.env.windows": {
+        "VIRTUAL_ENV": "${workspaceFolder}/.venv"
+    },
     "files.eol": "\n", // Unix
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.formatOnSave": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length=100"
-    ],
-    "python.sortImports.args": [
-        "--profile",
-        "black"
-    ],
-    "[python]": {
-        "editor.codeActionsOnSave": {
-            "source.fixAll": "never",
-            "source.organizeImports": "never"
-        }
-    },
+    "editor.formatOnSave": false,
     "python.analysis.extraPaths": [
         "."
     ]
