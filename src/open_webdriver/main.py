@@ -81,6 +81,7 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         opts.add_argument("--headless")
         if disable_gpu is None or disable_gpu is True:
             opts.add_argument("--disable-gpu")
+        opts.add_argument("--enable-unsafe-swiftshader")
     if user_agent:
         opts.add_argument(f"--user-agent={user_agent}")
     lock = filelock.FileLock(LOCK_FILE)
