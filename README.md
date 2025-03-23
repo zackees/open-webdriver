@@ -4,7 +4,8 @@
 
 Note that this package uses a pinned dependency for urllib3 and should be installed in an isolated environment.
 
-
+Alternatives:
+  * https://pypi.org/project/auto-selenium/
 # API
 
 ```bash
