@@ -17,6 +17,7 @@ from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 from webdriver_manager.core.driver_cache import DriverCacheManager  # type: ignore
+from webdriver_manager.core.os_manager import ChromeType  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR
@@ -51,6 +52,16 @@ def _user_agent(chrome_version: str | None = None) -> str:
     )
 
 
+def _init_log() -> None:
+    """Initializes the log."""
+    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+    with open(LOG_FILE, encoding="utf-8", mode="w") as filed:
+        filed.write(f"{__file__}: Starting up web driver.\n")
+        if sys.platform == "linux":
+            if os.geteuid() == 0:
+                filed.write("\n\n  WARNING: Running as root. The driver may crash!\n\n")
+
+
 def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
@@ -61,12 +72,7 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
 ) -> Driver:
     """Opens the web driver."""
     user_agent = user_agent or _user_agent()
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-    with open(LOG_FILE, encoding="utf-8", mode="w") as filed:
-        filed.write(f"{__file__}: Starting up web driver.\n")
-        if sys.platform == "linux":
-            if os.geteuid() == 0:
-                filed.write("\n\n  WARNING: Running as root. The driver may crash!\n\n")
+    _init_log()
     if headless or FORCE_HEADLESS:
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
@@ -95,9 +101,11 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         cache_manager = DriverCacheManager(
             root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
         )
+
         # opts.binary_location = chromium_exe
         driver_path = ChromeDriverManager(
-            cache_manager=cache_manager, driver_version=CHROME_VERSION
+            chrome_type=ChromeType.GOOGLE,
+            cache_manager=cache_manager,
         ).install()
     if verbose:
         print(f"\n  Using ChromeDriver: {driver_path}")
