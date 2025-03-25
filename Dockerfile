@@ -18,6 +18,9 @@ RUN apt-get install -y libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6
 
 RUN apt-get install -y ca-certificates
 
+# install chromium
+RUN apt-get install -y --fix-missing chromium
+
 WORKDIR /open_webdriver
 # Add requirements file and install.
 COPY open_webdriver ./open_webdriver

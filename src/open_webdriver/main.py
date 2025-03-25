@@ -12,6 +12,7 @@ from typing import Optional
 
 import filelock  # type: ignore
 import urllib3  # type: ignore
+from selenium import webdriver
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 
@@ -109,8 +110,6 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
             chromium_exe = get_chromium_exe()
             if verbose:
                 print("  Finished installing web driver: ", chromium_exe)
-
-        from selenium import webdriver
 
         # cache_manager = DriverCacheManager(
         #     root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
