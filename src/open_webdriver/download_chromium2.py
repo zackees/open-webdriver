@@ -87,6 +87,48 @@ def download_and_extract_chromium() -> str:
     return executable_path
 
 
+def find_chromium_in_paths() -> str | None:
+    """Search for Chromium in common system paths."""
+    system = platform.system()
+    if system not in PLATFORM_MAP:
+        return None
+
+    _, _, binary_name = PLATFORM_MAP[system]
+    # Get just the executable name without folder path
+    binary_name = os.path.basename(binary_name)
+
+    search_paths = []
+    if system == "Windows":
+        program_files = [
+            os.environ.get("PROGRAMFILES", "C:\\Program Files"),
+            os.environ.get("PROGRAMFILES(X86)", "C:\\Program Files (x86)"),
+        ]
+        for pf in program_files:
+            search_paths.extend(
+                [
+                    os.path.join(pf, "Chromium", binary_name),
+                    os.path.join(pf, "Google", "Chrome", binary_name),
+                ]
+            )
+    elif system == "Darwin":
+        search_paths.extend(
+            [
+                "/Applications/Chromium.app/Contents/MacOS/Chromium",
+                "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            ]
+        )
+    elif system == "Linux":
+        search_paths.extend(
+            ["/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome"]
+        )
+
+    for path in search_paths:
+        if os.path.isfile(path) and os.access(path, os.X_OK):
+            return path
+
+    return None
+
+
 def _set_exe_permissions(exe_path: str) -> None:
     if platform.system() == "Windows":
         return
@@ -99,6 +141,14 @@ def _set_exe_permissions(exe_path: str) -> None:
 
 def get_chromium_exe() -> str:
     """Fetches the Chromium executable path."""
+    # First check if Chromium exists in system paths
+    system_chromium = find_chromium_in_paths()
+    if system_chromium:
+        print("✅ Found existing Chromium installation at:")
+        print(f"▶ {system_chromium}")
+        return system_chromium
+
+    # If not found in system paths, download it
     exe_path = download_and_extract_chromium()
     if not os.path.exists(exe_path):
         print(f"❌ Chromium executable not found: {exe_path}")
