@@ -4,6 +4,7 @@ import platform
 import shutil
 import sys
 import zipfile
+from pathlib import Path
 
 from download import download  # pip install download
 
@@ -156,7 +157,7 @@ def get_chromium_exe() -> str:
 
     # add permissions
     _set_exe_permissions(exe_path)
-    return exe_path
+    return Path(exe_path).absolute().as_posix()
 
 
 if __name__ == "__main__":
