@@ -16,7 +16,7 @@ from selenium import webdriver
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
 
-from open_webdriver.download_chromium import get_chromium_exe
+from open_webdriver.download_chromium2 import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR
 
 urllib3.disable_warnings()
@@ -106,10 +106,8 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     with lock.acquire(timeout=timeout):
         if verbose:
             print("  Installing web driver...")
-        if CHROME_VERSION is not None:
-            chromium_exe = get_chromium_exe()
-            if verbose:
-                print("  Finished installing web driver: ", chromium_exe)
+        chromium_exe = get_chromium_exe()
+        opts.binary_location = chromium_exe
 
         # cache_manager = DriverCacheManager(
         #     root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS

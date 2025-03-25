@@ -18,11 +18,11 @@ dependencies = [
     "py7zr==0.20.2",
     "certifi",
     "six",
-
+    "httpx",
 ]
 
 # Change this with the version number bump.
-version = "1.6.5"
+version = "1.6.6"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

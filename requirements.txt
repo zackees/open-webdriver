@@ -1,7 +1,0 @@
-webdriver-manager==4.0.2
-selenium==4.29.0
-download
-filelock
-py7zr==0.20.2
-certifi
-six
