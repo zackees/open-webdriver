@@ -13,7 +13,7 @@ classifiers = ["Programming Language :: Python :: 3"]
 
 dependencies = [
     "webdriver-manager==4.0.2",
-    "selenium==4.29.0",
+    "selenium==4.30.0",
     "download",
     "filelock",
     "py7zr==0.20.2",
@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 # Change this with the version number bump.
-version = "1.6.4"
+version = "1.6.5"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

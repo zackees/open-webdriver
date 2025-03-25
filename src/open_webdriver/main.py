@@ -12,12 +12,8 @@ from typing import Optional
 
 import filelock  # type: ignore
 import urllib3  # type: ignore
-from selenium import webdriver  # type: ignore
 from selenium.webdriver import ChromeOptions  # type: ignore
 from selenium.webdriver.remote.webdriver import WebDriver as Driver  # type: ignore
-from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
-from webdriver_manager.core.driver_cache import DriverCacheManager  # type: ignore
-from webdriver_manager.core.os_manager import ChromeType  # type: ignore
 
 from open_webdriver.download_chromium import get_chromium_exe
 from open_webdriver.path import LOG_FILE, WDM_DIR
@@ -62,6 +58,27 @@ def _init_log() -> None:
                 filed.write("\n\n  WARNING: Running as root. The driver may crash!\n\n")
 
 
+def _make_options(
+    headless: bool,
+    disable_gpu: bool | None,
+    disable_dev_shm_usage: bool,
+    user_agent: str | None,
+) -> ChromeOptions:
+    """Makes the options."""
+    opts: ChromeOptions = ChromeOptions()
+    opts.add_argument("--ignore-certificate-errors")
+    opts.add_argument("--no-sandbox")
+    if headless:
+        opts.add_argument("--headless")
+        if disable_gpu:
+            opts.add_argument("--disable-gpu")
+    if disable_dev_shm_usage:
+        opts.add_argument("--disable-dev-shm-usage")
+    if user_agent:
+        opts.add_argument(f"--user-agent={user_agent}")
+    return opts
+
+
 def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
     headless: bool = True,
     verbose: bool = False,  # pylint: disable=unused-argument
@@ -77,19 +94,13 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
         if FORCE_HEADLESS and not headless:
             print("\n  WARNING: HEADLESS ENVIRONMENT DETECTED, FORCING HEADLESS")
         headless = True
-    # For Chrome/Brave just install the driver immediately.
-    opts: ChromeOptions = ChromeOptions()
-    opts.add_argument("--ignore-certificate-errors")
-    opts.add_argument("--no-sandbox")
-    if disable_dev_shm_usage:
-        opts.add_argument("--disable-dev-shm-usage")
-    if headless:
-        opts.add_argument("--headless")
-        if disable_gpu is None or disable_gpu is True:
-            opts.add_argument("--disable-gpu")
-        opts.add_argument("--enable-unsafe-swiftshader")
-    if user_agent:
-        opts.add_argument(f"--user-agent={user_agent}")
+    opts: ChromeOptions = _make_options(
+        headless=headless,
+        disable_gpu=disable_gpu,
+        disable_dev_shm_usage=disable_dev_shm_usage,
+        user_agent=user_agent,
+    )
+
     lock = filelock.FileLock(LOCK_FILE)
     with lock.acquire(timeout=timeout):
         if verbose:
@@ -98,17 +109,19 @@ def open_webdriver(  # pylint: disable=too-many-arguments,too-many-branches
             chromium_exe = get_chromium_exe()
             if verbose:
                 print("  Finished installing web driver: ", chromium_exe)
-        cache_manager = DriverCacheManager(
-            root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
-        )
 
-        # opts.binary_location = chromium_exe
-        driver_path = ChromeDriverManager(
-            chrome_type=ChromeType.GOOGLE,
-            cache_manager=cache_manager,
-        ).install()
-    if verbose:
-        print(f"\n  Using ChromeDriver: {driver_path}")
+        from selenium import webdriver
+
+        # cache_manager = DriverCacheManager(
+        #     root_dir=WDM_DIR, valid_range=CACHE_TIMEOUT_DAYS
+        # )
+        # # opts.binary_location = chromium_exe
+        # driver_path = ChromeDriverManager(
+        #     chrome_type=ChromeType.GOOGLE,
+        #     cache_manager=cache_manager,
+        # ).install()
+    # if verbose:
+    #     print(f"\n  Using ChromeDriver: {driver_path}")
     try:
         if os.path.exists(LOG_FILE):
             os.remove(LOG_FILE)
