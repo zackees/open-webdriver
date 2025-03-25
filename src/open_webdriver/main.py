@@ -70,7 +70,7 @@ def _make_options(
     opts.add_argument("--ignore-certificate-errors")
     opts.add_argument("--no-sandbox")
     if headless:
-        opts.add_argument("--headless")
+        opts.add_argument("--headless=new")
         if disable_gpu:
             opts.add_argument("--disable-gpu")
     if disable_dev_shm_usage:
