@@ -87,9 +87,26 @@ def download_and_extract_chromium() -> str:
     return executable_path
 
 
+def _set_exe_permissions(exe_path: str) -> None:
+    if platform.system() == "Windows":
+        return
+
+    os.chmod(exe_path, 0o755)
+    if platform.system() == "Darwin":
+        # Remove quarantine attribute
+        os.system(f"xattr -d com.apple.quarantine {exe_path}")
+
+
 def get_chromium_exe() -> str:
     """Fetches the Chromium executable path."""
-    return download_and_extract_chromium()
+    exe_path = download_and_extract_chromium()
+    if not os.path.exists(exe_path):
+        print(f"❌ Chromium executable not found: {exe_path}")
+        sys.exit(1)
+
+    # add permissions
+    _set_exe_permissions(exe_path)
+    return exe_path
 
 
 if __name__ == "__main__":
