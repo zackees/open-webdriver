@@ -1,6 +1,20 @@
 # open-webdriver
 
-## The simplest and easiest way to get a scriptable chrome browser running using selenium webdriver.
+## The simplest and easiest way to get a scriptable chrome browser running using selenium webdriver. As of selenium 4.6, these drivers are installed automatically, so this library not be as useful as it once was.
+
+#### Platform Unit Tests
+[![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
+[![Win_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
+[![Ubuntu_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
+
+#### Platform binary nuitka build
+[![MacOS_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml)
+[![Win_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
+[![Ubuntu_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
+
+#### Ubuntu Install Tests
+[![Ubuntu_Test_Install](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
+
 
 Note that this package uses a pinned dependency for urllib3 and should be installed in an isolated environment.
 
@@ -29,18 +43,6 @@ if __name__ == "__main__":
     main()
 ```
 
-#### Platform Unit Tests
-[![Actions Status](https://github.com/zackees/open-webdriver/workflows/MacOS_Tests/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos.yml)
-[![Win_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win.yml)
-[![Ubuntu_Tests](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu.yml)
-
-#### Platform binary nuitka build
-[![MacOS_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_macos_nuitka.yml)
-[![Win_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_win_nuitka.yml)
-[![Ubuntu_Nuitka](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_nuitka.yml)
-
-#### Ubuntu Install Tests
-[![Ubuntu_Test_Install](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml/badge.svg)](https://github.com/zackees/open-webdriver/actions/workflows/test_ubuntu_install.yml)
 
 
 # Versions
